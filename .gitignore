@@ -1,0 +1,19 @@
+# Dependencies
+node_modules/
+
+# Secrets (never commit real passwords or API keys)
+.env
+.env.local
+
+# Build output
+dist/
+build/
+
+# Logs and OS files
+*.log
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+!.vscode/extensions.json
