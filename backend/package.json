@@ -1,0 +1,18 @@
+{
+  "name": "airbnb-capstone-backend",
+  "version": "1.0.0",
+  "description": "API for Airbnb capstone (Express + MongoDB)",
+  "main": "server.js",
+  "scripts": {
+    "seed": "node scripts/seed.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "dotenv": "^17.4.2",
+    "mongodb": "^7.2.0",
+    "mongoose": "^9.6.3"
+  }
+}
