@@ -54,3 +54,25 @@ You should see “MongoDB connected” and “Seed complete” with sample login
 4. Stop the server with `Ctrl+C` in the terminal.
 
 `npm run dev` restarts the server automatically when you edit files (Node `--watch`).
+
+### Day 4 — login and JWT
+
+1. Set a strong `JWT_SECRET` in `backend/.env` (long random string).
+2. Start the server: `npm start`
+3. **Login** (PowerShell):
+
+   ```powershell
+   $body = @{ email = "jane@example.com"; password = "password321" } | ConvertTo-Json
+   Invoke-RestMethod -Method Post -Uri "http://localhost:5000/api/users/login" -Body $body -ContentType "application/json"
+   ```
+
+   Copy the `token` from the response.
+
+4. **Protected route** (replace `YOUR_TOKEN`):
+
+   ```powershell
+   $headers = @{ Authorization = "Bearer YOUR_TOKEN" }
+   Invoke-RestMethod -Uri "http://localhost:5000/api/users/me" -Headers $headers
+   ```
+
+   Seed users: `john@example.com` / `password123`, `jane@example.com` / `password321`.

@@ -4,6 +4,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const connectDB = require("./config/db");
 const errorHandler = require("./middleware/errorHandler");
+const userRoutes = require("./routes/userRoutes");
 
 /**
  * Day 3: start the API server and connect to MongoDB.
@@ -27,6 +28,8 @@ async function startServer() {
       database: dbConnected ? "connected" : "disconnected",
     });
   });
+
+  app.use("/api/users", userRoutes);
 
   // 404 — no matching route
   app.use((req, res) => {
