@@ -2,6 +2,8 @@
 
 Full-stack Airbnb clone for the web development capstone (due 27 June 2026).
 
+**Demo location:** Centurion, Gauteng, South Africa — used in seed data and examples.
+
 ## Project layout
 
 | Folder     | Purpose                                      |
@@ -76,3 +78,41 @@ You should see “MongoDB connected” and “Seed complete” with sample login
    ```
 
    Seed users: `john@example.com` / `password123`, `jane@example.com` / `password321`.
+
+### Day 5 — accommodations (GET + POST)
+
+1. Start server: `npm start`
+2. **Get all listings** (browser or PowerShell):
+
+   ```powershell
+   Invoke-RestMethod -Uri "http://localhost:5000/api/accommodations"
+   ```
+
+3. **Filter by location (Centurion, South Africa):**
+
+   ```powershell
+   Invoke-RestMethod -Uri "http://localhost:5000/api/accommodations?location=Centurion"
+   ```
+
+4. **Create listing** (login as host Jane first, then POST with token):
+
+   ```powershell
+   $login = @{ email = "jane@example.com"; password = "password321" } | ConvertTo-Json
+   $auth = Invoke-RestMethod -Method Post -Uri "http://localhost:5000/api/users/login" -Body $login -ContentType "application/json"
+
+   $listing = @{
+     title = "Family Home in Centurion"
+     description = "Quiet suburb in Centurion with garden and fast Wi-Fi."
+     type = "Entire house"
+     location = "Centurion"
+     guests = 6
+     bedrooms = 3
+     bathrooms = 2
+     price = 1200
+     amenities = @("wifi", "kitchen", "free parking", "braai area")
+     images = @("/images/centurion-house.jpg")
+   } | ConvertTo-Json
+
+   $headers = @{ Authorization = "Bearer $($auth.token)" }
+   Invoke-RestMethod -Method Post -Uri "http://localhost:5000/api/accommodations" -Body $listing -ContentType "application/json" -Headers $headers
+   ```

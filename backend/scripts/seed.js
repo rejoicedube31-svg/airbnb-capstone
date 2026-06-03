@@ -50,22 +50,23 @@ async function seed() {
   });
 
   const listing = await Accommodation.create({
-    title: "Modern Apartment in New York",
-    description: "Stay in the heart of New York City with skyline views.",
+    title: "Modern Apartment in Centurion",
+    description:
+      "Stay in Centurion, Gauteng — close to malls, highways, and Pretoria/Johannesburg.",
     type: "Entire apartment",
-    location: "New York",
+    location: "Centurion",
     guests: 4,
     bedrooms: 2,
     bathrooms: 2,
-    amenities: ["wifi", "kitchen", "free parking"],
+    amenities: ["wifi", "kitchen", "free parking", "pool"],
     images: [
-      "/images/new-york-lady-of-liberty.jpg",
-      "/images/new-york-lady-of-liberty.jpg",
-      "/images/new-york-lady-of-liberty.jpg",
-      "/images/new-york-lady-of-liberty.jpg",
-      "/images/new-york-lady-of-liberty.jpg",
+      "/images/centurion-apartment-1.jpg",
+      "/images/centurion-apartment-2.jpg",
+      "/images/centurion-apartment-3.jpg",
+      "/images/centurion-apartment-4.jpg",
+      "/images/centurion-apartment-5.jpg",
     ],
-    price: 320,
+    price: 850,
     weeklyDiscount: 0,
     cleaningFee: 50,
     serviceFee: 50,
