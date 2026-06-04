@@ -116,3 +116,26 @@ You should see “MongoDB connected” and “Seed complete” with sample login
    $headers = @{ Authorization = "Bearer $($auth.token)" }
    Invoke-RestMethod -Method Post -Uri "http://localhost:5000/api/accommodations" -Body $listing -ContentType "application/json" -Headers $headers
    ```
+
+### Day 6 — update and delete listings
+
+Use the listing `_id` from GET (e.g. Family Home in Centurion). Replace `LISTING_ID` below.
+
+1. Window 1: `npm start`
+2. Window 2 — login as Jane (same as Day 5 Step 4)
+3. **Get one listing** (browser): `http://localhost:5000/api/accommodations/LISTING_ID`
+4. **Update** (change price to 1100):
+
+   ```powershell
+   $headers = @{ Authorization = "Bearer $($auth.token)" }
+   $updates = @{ price = 1100; title = "Family Home in Centurion (Updated)" } | ConvertTo-Json
+   Invoke-RestMethod -Method Put -Uri "http://localhost:5000/api/accommodations/LISTING_ID" -Body $updates -ContentType "application/json" -Headers $headers
+   ```
+
+5. **Delete** (optional — removes that listing):
+
+   ```powershell
+   Invoke-RestMethod -Method Delete -Uri "http://localhost:5000/api/accommodations/LISTING_ID" -Headers $headers
+   ```
+
+6. Check all listings: `http://localhost:5000/api/accommodations` — count should drop by 1 after delete.

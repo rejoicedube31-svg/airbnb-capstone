@@ -1,3 +1,4 @@
+const mongoose = require("mongoose");
 const Accommodation = require("../models/Accommodation");
 
 const REQUIRED_FIELDS = [
@@ -29,6 +30,35 @@ async function getAllAccommodations(req, res) {
     success: true,
     count: accommodations.length,
     data: accommodations,
+  });
+}
+
+/**
+ * GET /api/accommodations/:id
+ * Why: Location Details page and admin “edit listing” need one listing by id.
+ */
+async function getAccommodationById(req, res) {
+  const { id } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).json({
+      success: false,
+      message: "Invalid listing id",
+    });
+  }
+
+  const accommodation = await Accommodation.findById(id);
+
+  if (!accommodation) {
+    return res.status(404).json({
+      success: false,
+      message: "Listing not found",
+    });
+  }
+
+  res.status(200).json({
+    success: true,
+    data: accommodation,
   });
 }
 
@@ -127,7 +157,108 @@ async function createAccommodation(req, res, next) {
   }
 }
 
+function hostOnly(req, res) {
+  if (req.user.role !== "host") {
+    res.status(403).json({
+      success: false,
+      message: "Only hosts can manage listings",
+    });
+    return false;
+  }
+  return true;
+}
+
+async function findOwnedListing(id, userId) {
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return { error: { status: 400, message: "Invalid listing id" } };
+  }
+
+  const accommodation = await Accommodation.findById(id);
+
+  if (!accommodation) {
+    return { error: { status: 404, message: "Listing not found" } };
+  }
+
+  if (accommodation.hostId.toString() !== userId) {
+    return { error: { status: 403, message: "You can only change your own listings" } };
+  }
+
+  return { accommodation };
+}
+
+/**
+ * PUT /api/accommodations/:id
+ * Why: Admin “update listing” form saves changes to an existing document.
+ */
+async function updateAccommodation(req, res, next) {
+  if (!hostOnly(req, res)) return;
+
+  const { accommodation, error } = await findOwnedListing(
+    req.params.id,
+    req.user.userId
+  );
+
+  if (error) {
+    return res.status(error.status).json({ success: false, message: error.message });
+  }
+
+  const updates = { ...req.body };
+  delete updates.host;
+  delete updates.hostId;
+  delete updates._id;
+
+  try {
+    const updated = await Accommodation.findByIdAndUpdate(
+      accommodation._id,
+      updates,
+      { new: true, runValidators: true }
+    );
+
+    res.status(200).json({
+      success: true,
+      data: updated,
+    });
+  } catch (err) {
+    if (err.name === "ValidationError") {
+      return res.status(400).json({
+        success: false,
+        message: Object.values(err.errors)
+          .map((e) => e.message)
+          .join(", "),
+      });
+    }
+    return next(err);
+  }
+}
+
+/**
+ * DELETE /api/accommodations/:id
+ * Why: Admin “view listings” page needs delete per row.
+ */
+async function deleteAccommodation(req, res) {
+  if (!hostOnly(req, res)) return;
+
+  const { accommodation, error } = await findOwnedListing(
+    req.params.id,
+    req.user.userId
+  );
+
+  if (error) {
+    return res.status(error.status).json({ success: false, message: error.message });
+  }
+
+  await accommodation.deleteOne();
+
+  res.status(200).json({
+    success: true,
+    message: "Listing deleted",
+  });
+}
+
 module.exports = {
   getAllAccommodations,
+  getAccommodationById,
   createAccommodation,
+  updateAccommodation,
+  deleteAccommodation,
 };
