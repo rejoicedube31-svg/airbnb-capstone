@@ -139,3 +139,48 @@ Use the listing `_id` from GET (e.g. Family Home in Centurion). Replace `LISTING
    ```
 
 6. Check all listings: `http://localhost:5000/api/accommodations` — count should drop by 1 after delete.
+
+### Day 7 — reservations
+
+1. Window 1: `npm start` (restart if server was already running)
+2. Window 2 — copy a listing `_id` from `http://localhost:5000/api/accommodations` (e.g. Modern Apartment in Centurion)
+3. **Book as John (guest):**
+
+   ```powershell
+   $listingId = "PASTE_LISTING_ID_HERE"
+
+   $login = @{ email = "john@example.com"; password = "password123" } | ConvertTo-Json
+   $john = Invoke-RestMethod -Method Post -Uri "http://localhost:5000/api/users/login" -Body $login -ContentType "application/json"
+   $headers = @{ Authorization = "Bearer $($john.token)" }
+
+   $booking = @{
+     accommodation = $listingId
+     checkIn = "2026-07-10"
+     checkOut = "2026-07-17"
+     guests = 2
+   } | ConvertTo-Json
+
+   $newBooking = Invoke-RestMethod -Method Post -Uri "http://localhost:5000/api/reservations" -Body $booking -ContentType "application/json" -Headers $headers
+   $newBooking
+   ```
+
+4. **John sees his bookings:** `GET /api/reservations/user`
+
+   ```powershell
+   Invoke-RestMethod -Uri "http://localhost:5000/api/reservations/user" -Headers $headers
+   ```
+
+5. **Jane sees bookings on her listings:**
+
+   ```powershell
+   $login = @{ email = "jane@example.com"; password = "password321" } | ConvertTo-Json
+   $jane = Invoke-RestMethod -Method Post -Uri "http://localhost:5000/api/users/login" -Body $login -ContentType "application/json"
+   $janeHeaders = @{ Authorization = "Bearer $($jane.token)" }
+   Invoke-RestMethod -Uri "http://localhost:5000/api/reservations/host" -Headers $janeHeaders
+   ```
+
+6. **Cancel** (use reservation `_id` from step 4):
+
+   ```powershell
+   Invoke-RestMethod -Method Delete -Uri "http://localhost:5000/api/reservations/RESERVATION_ID" -Headers $headers
+   ```
