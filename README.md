@@ -184,3 +184,17 @@ Use the listing `_id` from GET (e.g. Family Home in Centurion). Replace `LISTING
    ```powershell
    Invoke-RestMethod -Method Delete -Uri "http://localhost:5000/api/reservations/RESERVATION_ID" -Headers $headers
    ```
+
+### Day 8 — full backend test + polish
+
+1. Window 1:
+   ```powershell
+   cd C:\Users\rejoi\Projects\airbnb-capstone\backend
+   npm start
+   ```
+2. Window 2:
+   ```powershell
+   cd C:\Users\rejoi\Projects\airbnb-capstone\backend
+   npm run test:api
+   ```
+3. All tests should show **PASS**. See `backend/API.md` for endpoint list and rubric checklist.

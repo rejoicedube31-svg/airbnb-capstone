@@ -1,6 +1,7 @@
 require("dotenv").config();
 
 const express = require("express");
+const cors = require("cors");
 const mongoose = require("mongoose");
 const connectDB = require("./config/db");
 const errorHandler = require("./middleware/errorHandler");
@@ -16,6 +17,9 @@ async function startServer() {
   await connectDB(process.env.MONGODB_URI);
 
   const app = express();
+
+  // Allow React apps (client/admin) to call this API from another port
+  app.use(cors());
 
   // Parse JSON bodies — needed later for POST /api/users/login, listings, etc.
   app.use(express.json());
