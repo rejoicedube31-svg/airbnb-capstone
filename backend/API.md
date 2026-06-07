@@ -49,13 +49,18 @@ All lines should show `PASS`.
 
 ## Backend rubric checklist (self-score)
 
-- [ ] Project structure: controllers, models, routes, middleware, server.js
-- [ ] Accommodations CRUD (create, read all, read one, update, delete)
-- [ ] User login with JWT
-- [ ] Reservations create, user list, host list, delete
-- [ ] auth.js on protected routes
-- [ ] JSON errors with correct status codes (400, 401, 403, 404)
-- [ ] MongoDB via Mongoose with schemas
-- [ ] Passwords hashed (bcrypt)
-- [ ] CORS enabled for React apps
-- [ ] .env for secrets (not committed)
+Mark before submission. See `DEPLOYMENT.md` for security and deploy notes.
+
+- [x] Project structure: controllers, models, routes, middleware, server.js
+- [x] Accommodations CRUD (create, read all, read one, update, delete)
+- [x] User login with JWT
+- [x] Reservations create, user list, host list, delete
+- [x] auth.js on protected routes
+- [x] JSON errors with correct status codes (400, 401, 403, 404)
+- [x] MongoDB via Mongoose with schemas
+- [x] Passwords hashed (bcrypt)
+- [x] CORS enabled for React apps
+- [x] .env for secrets (not committed)
+- [x] Optional: Multer image upload
+- [ ] API test script passes: `npm run test:api`
+- [ ] Strong JWT_SECRET set in production `.env`

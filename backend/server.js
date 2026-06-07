@@ -19,8 +19,15 @@ async function startServer() {
 
   const app = express();
 
-  // Allow React apps (client/admin) to call this API from another port
-  app.use(cors());
+  // CORS — open in dev; restrict to React URLs in production via .env
+  const allowedOrigins = [process.env.CLIENT_URL, process.env.ADMIN_URL].filter(Boolean);
+  app.use(
+    cors(
+      allowedOrigins.length > 0
+        ? { origin: allowedOrigins }
+        : undefined
+    )
+  );
 
   // Parse JSON bodies — needed later for POST /api/users/login, listings, etc.
   app.use(express.json());

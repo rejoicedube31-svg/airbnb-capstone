@@ -14,8 +14,8 @@ Full-stack Airbnb clone for the web development capstone (due 27 June 2026).
 
 ## Stack
 
-- **Backend:** Node.js, Express, Mongoose, JWT
-- **Frontend:** React, CSS
+- **Backend:** Node.js, Express, Mongoose, JWT — **complete** (see `backend/API.md`)
+- **Frontend:** React, CSS — starting Day 11
 
 ## Getting started
 
@@ -213,8 +213,27 @@ Use the listing `_id` from GET (e.g. Family Home in Centurion). Replace `LISTING
    Invoke-RestMethod -Method Post -Uri "http://localhost:5000/api/accommodations/upload" -Headers $headers -Form $form
    ```
 
+   **Windows PowerShell 5:** use `curl.exe` instead (no `-Form` support):
+
+   ```powershell
+   curl.exe -X POST "http://localhost:5000/api/accommodations/upload" -H "Authorization: Bearer $($auth.token)" -F "image=@C:\path\to\photo.jpg"
+   ```
+
 3. Response includes `url` like `/uploads/123456-photo.jpg`. Open in browser:
 
    `http://localhost:5000/uploads/123456-photo.jpg`
 
 4. Add that `url` to the `images` array when creating or updating a listing.
+
+### Day 10 — backend complete (security + deployment)
+
+1. Read `backend/DEPLOYMENT.md` — security checklist and how to submit.
+2. Set a **strong** `JWT_SECRET` in `backend/.env` (replace the placeholder).
+3. Final test:
+   ```powershell
+   cd C:\Users\rejoi\Projects\airbnb-capstone\backend
+   npm start
+   ```
+   Second window: `npm run test:api` → all **PASS**.
+
+**Backend phase done.** Next: **Day 11** — create the React `client/` app (public Centurion site).
