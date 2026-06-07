@@ -9,6 +9,10 @@ node_modules/
 dist/
 build/
 
+# Uploaded listing images (keep folder, ignore files)
+backend/uploads/*
+!backend/uploads/.gitkeep
+
 # Logs and OS files
 *.log
 .DS_Store

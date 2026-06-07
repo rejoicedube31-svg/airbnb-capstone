@@ -31,6 +31,18 @@ function errorHandler(err, req, res, next) {
     });
   }
 
+  if (err.name === "MulterError") {
+    const message =
+      err.code === "LIMIT_FILE_SIZE"
+        ? "Image too large — maximum size is 5MB"
+        : err.message;
+    return res.status(400).json({ success: false, message });
+  }
+
+  if (err.message && err.message.includes("Only JPEG")) {
+    return res.status(400).json({ success: false, message: err.message });
+  }
+
   const statusCode = err.statusCode || 500;
   const message =
     statusCode === 500 ? "Internal server error" : err.message || "Request failed";

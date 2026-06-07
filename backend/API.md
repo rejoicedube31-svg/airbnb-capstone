@@ -16,6 +16,7 @@ Demo location: **Centurion, South Africa**
 | POST | `/api/accommodations` | JWT host | Create listing |
 | PUT | `/api/accommodations/:id` | JWT host owner | Update listing |
 | DELETE | `/api/accommodations/:id` | JWT host owner | Delete listing |
+| POST | `/api/accommodations/upload` | JWT host | Upload image (form field `image`) → returns `url` |
 | POST | `/api/reservations` | JWT | Book a stay |
 | GET | `/api/reservations/user` | JWT | Guest's bookings |
 | GET | `/api/reservations/host` | JWT host | Host's bookings |

@@ -1,5 +1,6 @@
 require("dotenv").config();
 
+const path = require("path");
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
@@ -23,6 +24,9 @@ async function startServer() {
 
   // Parse JSON bodies — needed later for POST /api/users/login, listings, etc.
   app.use(express.json());
+
+  // Serve uploaded images so browser can show /uploads/filename.jpg
+  app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
   // Health check — quick way to verify the API is running.
   app.get("/api/health", (req, res) => {

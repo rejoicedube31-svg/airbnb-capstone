@@ -255,10 +255,40 @@ async function deleteAccommodation(req, res) {
   });
 }
 
+/**
+ * POST /api/accommodations/upload
+ * Form field name: image
+ * Why: Optional brief feature — host uploads a photo, gets a URL for the listing images array.
+ */
+function uploadListingImage(req, res) {
+  if (req.user.role !== "host") {
+    return res.status(403).json({
+      success: false,
+      message: "Only hosts can upload listing images",
+    });
+  }
+
+  if (!req.file) {
+    return res.status(400).json({
+      success: false,
+      message: "No image file — use form field name 'image'",
+    });
+  }
+
+  const url = `/uploads/${req.file.filename}`;
+
+  res.status(201).json({
+    success: true,
+    url,
+    message: "Image uploaded — add this url to the listing images array",
+  });
+}
+
 module.exports = {
   getAllAccommodations,
   getAccommodationById,
   createAccommodation,
   updateAccommodation,
   deleteAccommodation,
+  uploadListingImage,
 };

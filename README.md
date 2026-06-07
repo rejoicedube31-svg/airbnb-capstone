@@ -198,3 +198,23 @@ Use the listing `_id` from GET (e.g. Family Home in Centurion). Replace `LISTING
    npm run test:api
    ```
 3. All tests should show **PASS**. See `backend/API.md` for endpoint list and rubric checklist.
+
+### Day 9 — image upload (optional brief feature)
+
+1. Window 1: `npm start` (in `backend`)
+2. Window 2 — login as Jane, upload a photo from your PC:
+
+   ```powershell
+   $login = @{ email = "jane@example.com"; password = "password321" } | ConvertTo-Json
+   $auth = Invoke-RestMethod -Method Post -Uri "http://localhost:5000/api/users/login" -Body $login -ContentType "application/json"
+   $headers = @{ Authorization = "Bearer $($auth.token)" }
+
+   $form = @{ image = Get-Item -Path "C:\path\to\your\photo.jpg" }
+   Invoke-RestMethod -Method Post -Uri "http://localhost:5000/api/accommodations/upload" -Headers $headers -Form $form
+   ```
+
+3. Response includes `url` like `/uploads/123456-photo.jpg`. Open in browser:
+
+   `http://localhost:5000/uploads/123456-photo.jpg`
+
+4. Add that `url` to the `images` array when creating or updating a listing.
