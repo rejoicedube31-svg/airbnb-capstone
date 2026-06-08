@@ -15,7 +15,7 @@ Full-stack Airbnb clone for the web development capstone (due 27 June 2026).
 ## Stack
 
 - **Backend:** Node.js, Express, Mongoose, JWT — **complete** (see `backend/API.md`)
-- **Frontend:** React, CSS — starting Day 11
+- **Frontend:** React, CSS — **Day 11 started** (`client/`)
 
 ## Getting started
 
@@ -237,3 +237,32 @@ Use the listing `_id` from GET (e.g. Family Home in Centurion). Replace `LISTING
    Second window: `npm run test:api` → all **PASS**.
 
 **Backend phase done.** Next: **Day 11** — create the React `client/` app (public Centurion site).
+
+### Day 11 — React client setup + Home hero
+
+You need **two terminals** — backend and client.
+
+**Terminal 1 — API (must be running):**
+
+```powershell
+cd C:\Users\rejoi\Projects\airbnb-capstone\backend
+npm start
+```
+
+**Terminal 2 — React app:**
+
+```powershell
+cd C:\Users\rejoi\Projects\airbnb-capstone\client
+copy .env.example .env
+npm install
+npm run dev
+```
+
+Open [http://localhost:5173](http://localhost:5173)
+
+**Success:**
+
+- Centurion hero banner with “Explore Centurion stays” button
+- Green line: “Connected to API — X Centurion listings available”
+
+If you see a red API error, start the backend first (Terminal 1).

@@ -1,0 +1,14 @@
+.home__status {
+  padding: 1.5rem 2rem;
+}
+
+.home__api-ok {
+  color: #008a05;
+  font-weight: 500;
+  margin: 0;
+}
+
+.home__error {
+  color: #c13515;
+  margin: 0;
+}
