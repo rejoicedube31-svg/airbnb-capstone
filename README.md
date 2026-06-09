@@ -266,3 +266,13 @@ Open [http://localhost:5173](http://localhost:5173)
 - Green line: “Connected to API — X Centurion listings available”
 
 If you see a red API error, start the backend first (Terminal 1).
+
+### Day 12 — inspiration location cards
+
+Scroll below the hero on [http://localhost:5173](http://localhost:5173):
+
+- Section title: **Inspiration for your next trip**
+- Grid of Centurion listings from `GET /api/accommodations?location=Centurion`
+- Each card: image, title, type, price (R/night), link to `/listings/:id`
+
+**Success:** You see your seeded apartment, family home, and townhouse (if in DB).

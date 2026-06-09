@@ -1,21 +1,23 @@
 import { useEffect, useState } from "react";
 import Header from "../components/Header";
 import HeroBanner from "../components/HeroBanner";
+import InspirationSection from "../components/InspirationSection";
 import { apiGet } from "../api/client";
 import "./Home.css";
 
 /**
- * Home page — hero first; more sections added on Days 12–13.
+ * Home page — hero + inspiration cards (more sections on Days 13+).
  */
 export default function Home() {
-  const [listingCount, setListingCount] = useState(null);
-  const [apiError, setApiError] = useState("");
+  const [listings, setListings] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
   useEffect(() => {
-    // Proof that React can talk to your backend
     apiGet("/api/accommodations?location=Centurion")
-      .then((data) => setListingCount(data.count))
-      .catch((err) => setApiError(err.message));
+      .then((data) => setListings(data.data || []))
+      .catch((err) => setError(err.message))
+      .finally(() => setLoading(false));
   }, []);
 
   return (
@@ -23,20 +25,7 @@ export default function Home() {
       <Header />
       <main>
         <HeroBanner />
-
-        <section className="home__status">
-          {apiError && (
-            <p className="home__error">
-              API not reachable — is the backend running on port 5000? ({apiError})
-            </p>
-          )}
-          {!apiError && listingCount !== null && (
-            <p className="home__api-ok">
-              Connected to API — {listingCount} Centurion listing
-              {listingCount === 1 ? "" : "s"} available
-            </p>
-          )}
-        </section>
+        <InspirationSection listings={listings} loading={loading} error={error} />
       </main>
     </div>
   );

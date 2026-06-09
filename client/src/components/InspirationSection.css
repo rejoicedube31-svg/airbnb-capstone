@@ -1,0 +1,33 @@
+.inspiration {
+  padding: 2.5rem 2rem 3rem;
+}
+
+.inspiration__header {
+  margin-bottom: 1.75rem;
+}
+
+.inspiration__header h2 {
+  margin: 0 0 0.5rem;
+  font-size: 1.6rem;
+}
+
+.inspiration__header p {
+  margin: 0;
+  color: #717171;
+}
+
+.inspiration__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1.5rem;
+}
+
+.inspiration__message {
+  color: #717171;
+  margin: 0;
+}
+
+.inspiration__error {
+  color: #c13515;
+  margin: 0;
+}
