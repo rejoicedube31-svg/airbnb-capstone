@@ -2,11 +2,15 @@ import { useEffect, useState } from "react";
 import Header from "../components/Header";
 import HeroBanner from "../components/HeroBanner";
 import InspirationSection from "../components/InspirationSection";
+import DiscoverExperiences from "../components/DiscoverExperiences";
+import ThingsToDo from "../components/ThingsToDo";
+import ShopAirbnb from "../components/ShopAirbnb";
 import { apiGet } from "../api/client";
 import "./Home.css";
 
 /**
- * Home page — hero + inspiration cards (more sections on Days 13+).
+ * Home page — hero, inspiration, experiences, things to do, ShopAirbnb.
+ * Future getaways + footer on Day 14.
  */
 export default function Home() {
   const [listings, setListings] = useState([]);
@@ -26,6 +30,9 @@ export default function Home() {
       <main>
         <HeroBanner />
         <InspirationSection listings={listings} loading={loading} error={error} />
+        <DiscoverExperiences />
+        <ThingsToDo />
+        <ShopAirbnb />
       </main>
     </div>
   );

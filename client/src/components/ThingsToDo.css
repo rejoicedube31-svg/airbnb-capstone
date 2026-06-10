@@ -1,0 +1,52 @@
+.things {
+  padding: 0 2rem 2.5rem;
+}
+
+.things__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.25rem;
+}
+
+.things__panel {
+  min-height: 360px;
+  border-radius: 16px;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+}
+
+.things__content {
+  width: 100%;
+  padding: 1.75rem;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+  color: #fff;
+}
+
+.things__content h2 {
+  margin: 0 0 0.5rem;
+  font-size: 1.4rem;
+}
+
+.things__content p {
+  margin: 0 0 1rem;
+  font-size: 0.95rem;
+  opacity: 0.95;
+  max-width: 320px;
+}
+
+.things__content button {
+  border: none;
+  background: #fff;
+  color: #222;
+  font-weight: 600;
+  padding: 0.7rem 1.2rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.things__content button:hover {
+  background: #f7f7f7;
+}

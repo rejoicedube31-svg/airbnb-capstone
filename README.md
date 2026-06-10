@@ -276,3 +276,13 @@ Scroll below the hero on [http://localhost:5173](http://localhost:5173):
 - Each card: image, title, type, price (R/night), link to `/listings/:id`
 
 **Success:** You see your seeded apartment, family home, and townhouse (if in DB).
+
+### Day 13 — experiences, things to do, ShopAirbnb
+
+Scroll the Home page — after inspiration you should see:
+
+1. **Discover Airbnb Experiences** — two cards with buttons
+2. **Things to do on your trip** + **Things to do at home** — image panels with buttons
+3. **ShopAirbnb** — two columns (text + gift card image)
+
+All static content (no API) — matches the brief’s Home page sections.

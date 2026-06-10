@@ -1,0 +1,53 @@
+.shop {
+  padding: 2.5rem 2rem 3rem;
+}
+
+.shop__inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: center;
+  background: #f7f7f7;
+  border-radius: 16px;
+  padding: 2rem;
+}
+
+.shop__text h2 {
+  margin: 0 0 0.75rem;
+  font-size: 1.6rem;
+}
+
+.shop__text p {
+  margin: 0 0 1.25rem;
+  color: #484848;
+  line-height: 1.5;
+  max-width: 400px;
+}
+
+.shop__text button {
+  border: none;
+  background: #222;
+  color: #fff;
+  font-weight: 600;
+  padding: 0.75rem 1.25rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.shop__text button:hover {
+  background: #000;
+}
+
+.shop__image img {
+  width: 100%;
+  border-radius: 12px;
+  display: block;
+  object-fit: cover;
+  max-height: 280px;
+}
+
+@media (max-width: 768px) {
+  .shop__inner {
+    grid-template-columns: 1fr;
+  }
+}
