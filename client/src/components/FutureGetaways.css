@@ -1,0 +1,65 @@
+.getaways {
+  padding: 2.5rem 2rem;
+  border-top: 1px solid #ebebeb;
+}
+
+.getaways h2 {
+  margin: 0 0 1.25rem;
+  font-size: 1.6rem;
+}
+
+.getaways__tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.getaways__tab {
+  border: 1px solid #ddd;
+  background: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  color: #222;
+}
+
+.getaways__tab.active {
+  background: #222;
+  color: #fff;
+  border-color: #222;
+}
+
+.getaways__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.75rem;
+  max-width: 640px;
+}
+
+.getaways__list li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid #ebebeb;
+}
+
+.getaways__list a {
+  font-weight: 600;
+  color: #222;
+  text-decoration: none;
+}
+
+.getaways__list a:hover {
+  text-decoration: underline;
+}
+
+.getaways__list span {
+  font-size: 0.9rem;
+  color: #717171;
+}

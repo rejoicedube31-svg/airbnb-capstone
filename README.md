@@ -286,3 +286,13 @@ Scroll the Home page — after inspiration you should see:
 3. **ShopAirbnb** — two columns (text + gift card image)
 
 All static content (no API) — matches the brief’s Home page sections.
+
+### Day 14 — future getaways + footers (Home page complete)
+
+Scroll to the bottom of [http://localhost:5173](http://localhost:5173):
+
+1. **Inspiration for future getaways** — click tabs (Gauteng, Coastal, Winelands); list updates
+2. **Footer** — 4 columns of links (Support, Hosting, Airbnb, Explore)
+3. **Copyright bar** — © text, social icons, Language (English ZA), Currency (ZAR)
+
+**Home page rubric sections are now all present.**

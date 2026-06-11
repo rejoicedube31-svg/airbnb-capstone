@@ -5,12 +5,14 @@ import InspirationSection from "../components/InspirationSection";
 import DiscoverExperiences from "../components/DiscoverExperiences";
 import ThingsToDo from "../components/ThingsToDo";
 import ShopAirbnb from "../components/ShopAirbnb";
+import FutureGetaways from "../components/FutureGetaways";
+import Footer from "../components/Footer";
+import CopyrightFooter from "../components/CopyrightFooter";
 import { apiGet } from "../api/client";
 import "./Home.css";
 
 /**
- * Home page — hero, inspiration, experiences, things to do, ShopAirbnb.
- * Future getaways + footer on Day 14.
+ * Home page — complete per brief (hero through copyright footer).
  */
 export default function Home() {
   const [listings, setListings] = useState([]);
@@ -33,7 +35,10 @@ export default function Home() {
         <DiscoverExperiences />
         <ThingsToDo />
         <ShopAirbnb />
+        <FutureGetaways />
       </main>
+      <Footer />
+      <CopyrightFooter />
     </div>
   );
 }
