@@ -296,3 +296,16 @@ Scroll to the bottom of [http://localhost:5173](http://localhost:5173):
 3. **Copyright bar** — © text, social icons, Language (English ZA), Currency (ZAR)
 
 **Home page rubric sections are now all present.**
+
+### Day 15 — Location page
+
+Open [http://localhost:5173/locations?location=Centurion](http://localhost:5173/locations?location=Centurion)
+
+Or click **Explore Centurion stays** on the hero, or search from the header.
+
+**Success:**
+
+- Heading: `X accommodations in Centurion`
+- Each row: image **left**, details **right** (type, title, amenities, rating, reviews, R/night)
+- Change filter to search another location (e.g. Centurion only for now in your data)
+- Click a row → listing details placeholder

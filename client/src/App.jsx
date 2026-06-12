@@ -1,16 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
+import LocationPage from "./pages/LocationPage";
 import "./App.css";
-
-/** Placeholder — Location page built on Day 14 */
-function LocationPage() {
-  return (
-    <div className="placeholder-page">
-      <h1>Location page</h1>
-      <p>Coming on Day 14 — Centurion listings from the API.</p>
-    </div>
-  );
-}
 
 /** Placeholder — Listing details built on Day 18 */
 function ListingDetailsPage() {

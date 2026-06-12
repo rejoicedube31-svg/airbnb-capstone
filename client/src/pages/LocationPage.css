@@ -1,0 +1,74 @@
+.location-page__main {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 1.5rem 2rem 3rem;
+}
+
+.location-page__filter {
+  margin-bottom: 1.5rem;
+}
+
+.location-page__filter label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #717171;
+  margin-bottom: 0.35rem;
+}
+
+.location-page__filter-row {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.location-page__filter-row input {
+  flex: 1;
+  min-width: 200px;
+  border: 1px solid #ddd;
+  border-radius: 999px;
+  padding: 0.65rem 1rem;
+  font-size: 1rem;
+}
+
+.location-page__filter-row button {
+  border: none;
+  background: #ff385c;
+  color: #fff;
+  font-weight: 600;
+  padding: 0.65rem 1.25rem;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.location-page__filter-row button:hover {
+  background: #e31c5f;
+}
+
+.location-page__heading {
+  margin-bottom: 1.5rem;
+}
+
+.location-page__heading h1 {
+  margin: 0 0 0.35rem;
+  font-size: clamp(1.35rem, 3vw, 1.75rem);
+}
+
+.location-page__heading p {
+  margin: 0;
+  color: #717171;
+}
+
+.location-page__message {
+  color: #717171;
+}
+
+.location-page__error {
+  color: #c13515;
+}
+
+.location-page__list {
+  display: flex;
+  flex-direction: column;
+}
