@@ -1,0 +1,82 @@
+.listing-info section {
+  padding: 1.75rem 0;
+  border-bottom: 1px solid #ebebeb;
+}
+
+.listing-info h2 {
+  margin: 0 0 0.75rem;
+  font-size: 1.35rem;
+}
+
+.listing-info p {
+  margin: 0 0 0.5rem;
+  line-height: 1.55;
+  color: #484848;
+}
+
+.listing-info__stats {
+  font-weight: 500;
+  color: #222 !important;
+}
+
+.listing-info__sleep-card {
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 1rem;
+  max-width: 280px;
+}
+
+.listing-info__sleep-title {
+  font-weight: 600;
+  color: #222 !important;
+}
+
+.listing-info__amenities {
+  margin: 0;
+  padding-left: 1.25rem;
+  columns: 2;
+  gap: 0.5rem;
+}
+
+.listing-info__rating-headline {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #222 !important;
+}
+
+.listing-info__rating-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.listing-info__rating-grid div {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  text-transform: capitalize;
+}
+
+.listing-info__host {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #222 !important;
+}
+
+.listing-info__policies {
+  margin: 0;
+  padding-left: 1.25rem;
+  color: #484848;
+}
+
+.listing-info__policies li {
+  margin-bottom: 0.35rem;
+}
+
+@media (max-width: 600px) {
+  .listing-info__amenities {
+    columns: 1;
+  }
+}

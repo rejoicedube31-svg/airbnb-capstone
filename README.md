@@ -309,3 +309,17 @@ Or click **Explore Centurion stays** on the hero, or search from the header.
 - Each row: image **left**, details **right** (type, title, amenities, rating, reviews, R/night)
 - Change filter to search another location (e.g. Centurion only for now in your data)
 - Click a row → listing details placeholder
+
+### Day 16 — listing details (gallery + static sections)
+
+Click any listing from Home or Location page, or open an id directly:
+
+`http://localhost:5173/listings/LISTING_ID`
+
+**Success:**
+
+- Heading: `{type} in Centurion`, subheading (title), ★ rating + reviews + location
+- Gallery: large image left, 4 smaller images (2×2) on the right
+- Left column: about, sleep, amenities, 7 nights, reviews, host, policies
+- Right column: price card (full calculator on Day 17)
+- Footer + copyright at bottom
