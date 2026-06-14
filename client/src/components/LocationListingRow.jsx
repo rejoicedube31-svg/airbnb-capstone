@@ -1,17 +1,9 @@
 import { Link } from "react-router-dom";
-import { imageUrl } from "../api/client";
+import { listingImageUrl, onListingImageError } from "../api/client";
 import "./LocationListingRow.css";
 
-const FALLBACK_IMAGE =
-  "https://images.unsplash.com/photo-1580060839134-75a3eade3bf6?auto=format&fit=crop&w=800&q=80";
-
-/**
- * Location page card — image left, details right.
- * Why: Brief requires this layout on the Location page (not the home grid).
- */
 export default function LocationListingRow({ listing }) {
-  const mainImage = listing.images?.[0];
-  const imgSrc = mainImage ? imageUrl(mainImage) : FALLBACK_IMAGE;
+  const imgSrc = listingImageUrl(listing.images?.[0], 0);
   const amenities = listing.amenities?.slice(0, 4).join(" · ") || "No amenities listed";
 
   return (
@@ -20,9 +12,7 @@ export default function LocationListingRow({ listing }) {
         <img
           src={imgSrc}
           alt={listing.title}
-          onError={(e) => {
-            e.currentTarget.src = FALLBACK_IMAGE;
-          }}
+          onError={(e) => onListingImageError(e, 0)}
         />
       </div>
       <div className="location-row__details">

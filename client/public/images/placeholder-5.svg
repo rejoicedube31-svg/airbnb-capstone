@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+  <rect width="800" height="600" fill="#F8F8F8"/>
+  <rect x="100" y="280" width="600" height="12" fill="#ddd"/>
+  <rect x="150" y="180" width="200" height="100" rx="6" fill="#FF385C" opacity="0.7"/>
+  <rect x="550" y="180" width="200" height="100" rx="6" fill="#FF385C" opacity="0.7"/>
+  <text x="400" y="520" text-anchor="middle" font-family="Arial,sans-serif" font-size="28" fill="#484848">Gauteng view</text>
+</svg>

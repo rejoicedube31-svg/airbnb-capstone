@@ -287,6 +287,19 @@ Scroll the Home page — after inspiration you should see:
 
 All static content (no API) — matches the brief’s Home page sections.
 
+### Day 17 — cost calculator + Reserve
+
+Open any listing details page. Backend must be running.
+
+1. Pick **check-in** / **check-out** — total updates automatically
+2. Choose **guests**
+3. Log in as John: `john@example.com` / `password123`
+4. Click **Reserve** — saves to MongoDB via `POST /api/reservations`
+
+**Success:** green message “Reservation confirmed! Saved to MongoDB.”
+
+Verify: log in as Jane in API or check Atlas `reservations` collection.
+
 ### Day 14 — future getaways + footers (Home page complete)
 
 Scroll to the bottom of [http://localhost:5173](http://localhost:5173):

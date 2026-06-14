@@ -10,6 +10,7 @@
 
 .listing-gallery__main {
   min-height: 320px;
+  background: #ebebeb;
 }
 
 .listing-gallery__main img {
@@ -29,6 +30,7 @@
 
 .listing-gallery__thumb {
   min-height: 0;
+  background: #ebebeb;
 }
 
 .listing-gallery__thumb img {

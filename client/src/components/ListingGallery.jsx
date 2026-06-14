@@ -1,41 +1,30 @@
-import { imageUrl } from "../api/client";
+import { listingImageUrl, onListingImageError } from "../api/client";
 import "./ListingGallery.css";
-
-const FALLBACK =
-  "https://images.unsplash.com/photo-1580060839134-75a3eade3bf6?auto=format&fit=crop&w=1200&q=80";
 
 /**
  * Image gallery — large image left, four smaller images in a 2×2 grid on the right.
- * Why: Brief specifies this exact layout on the Location Details page.
  */
 export default function ListingGallery({ images = [], title }) {
   const slots = Array.from({ length: 5 }, (_, i) => images[i] || null);
-  const [main, ...thumbs] = slots;
-
-  function src(path) {
-    return path ? imageUrl(path) : FALLBACK;
-  }
 
   return (
     <div className="listing-gallery">
       <div className="listing-gallery__main">
         <img
-          src={src(main)}
+          src={listingImageUrl(slots[0], 0)}
           alt={title}
-          onError={(e) => {
-            e.currentTarget.src = FALLBACK;
-          }}
+          loading="eager"
+          onError={(e) => onListingImageError(e, 0)}
         />
       </div>
       <div className="listing-gallery__grid">
-        {thumbs.map((img, index) => (
+        {slots.slice(1).map((img, index) => (
           <div key={index} className="listing-gallery__thumb">
             <img
-              src={src(img)}
+              src={listingImageUrl(img, index + 1)}
               alt=""
-              onError={(e) => {
-                e.currentTarget.src = FALLBACK;
-              }}
+              loading="lazy"
+              onError={(e) => onListingImageError(e, index + 1)}
             />
           </div>
         ))}

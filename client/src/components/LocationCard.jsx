@@ -1,17 +1,9 @@
 import { Link } from "react-router-dom";
-import { imageUrl } from "../api/client";
+import { listingImageUrl, onListingImageError } from "../api/client";
 import "./LocationCard.css";
 
-const FALLBACK_IMAGE =
-  "https://images.unsplash.com/photo-1580060839134-75a3eade3bf6?auto=format&fit=crop&w=800&q=80";
-
-/**
- * One property card for the inspiration grid.
- * Why: Brief asks for location cards with appealing visuals on the Home page.
- */
 export default function LocationCard({ listing }) {
-  const mainImage = listing.images?.[0];
-  const imgSrc = mainImage ? imageUrl(mainImage) : FALLBACK_IMAGE;
+  const imgSrc = listingImageUrl(listing.images?.[0], 0);
 
   return (
     <Link to={`/listings/${listing._id}`} className="location-card">
@@ -19,9 +11,7 @@ export default function LocationCard({ listing }) {
         <img
           src={imgSrc}
           alt={listing.title}
-          onError={(e) => {
-            e.currentTarget.src = FALLBACK_IMAGE;
-          }}
+          onError={(e) => onListingImageError(e, 0)}
         />
       </div>
       <div className="location-card__body">

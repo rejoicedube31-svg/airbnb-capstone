@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+  <rect width="800" height="600" fill="#F0EEF8"/>
+  <rect x="240" y="160" width="320" height="320" rx="160" fill="#FF385C" opacity="0.25"/>
+  <rect x="280" y="240" width="240" height="180" rx="8" fill="#222"/>
+  <text x="400" y="520" text-anchor="middle" font-family="Arial,sans-serif" font-size="28" fill="#484848">Townhouse</text>
+</svg>
