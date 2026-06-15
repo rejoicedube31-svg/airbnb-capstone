@@ -45,9 +45,21 @@
   display: flex;
   align-items: center;
   gap: 0.75rem;
+  position: relative;
 }
 
 .header__host-link {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #222;
+  text-decoration: none;
+}
+
+.header__host-link:hover {
+  text-decoration: underline;
+}
+
+.header__greeting {
   font-size: 0.9rem;
   font-weight: 500;
   color: #222;
@@ -56,9 +68,70 @@
 .header__menu-btn {
   border: 1px solid #ddd;
   border-radius: 999px;
-  padding: 0.4rem 0.65rem;
+  padding: 0.25rem;
   background: #fff;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header__avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #717171;
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.header__dropdown {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  right: 0;
+  min-width: 220px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.12);
+  padding: 0.5rem 0;
+  z-index: 20;
+}
+
+.header__dropdown-user {
+  margin: 0;
+  padding: 0.5rem 1rem 0.75rem;
+  font-size: 0.8rem;
+  color: #717171;
+  border-bottom: 1px solid #ebebeb;
+}
+
+.header__dropdown-item {
+  display: block;
+  width: 100%;
+  padding: 0.65rem 1rem;
+  text-align: left;
+  font-size: 0.9rem;
+  color: #222;
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.header__dropdown-item:hover {
+  background: #f7f7f7;
+}
+
+.header__dropdown-item--btn {
+  font-family: inherit;
+  border-top: 1px solid #ebebeb;
+  margin-top: 0.25rem;
+  padding-top: 0.75rem;
 }
 
 @media (max-width: 768px) {

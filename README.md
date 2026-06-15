@@ -300,6 +300,16 @@ Open any listing details page. Backend must be running.
 
 Verify: log in as Jane in API or check Atlas `reservations` collection.
 
+### Day 18 — header login + reservations table
+
+1. **Logged out:** header shows **Become a host** → links to `/login`
+2. Click **profile icon** (☰) → **Log in** or browse
+3. Log in as John: `john@example.com` / password123
+4. Header shows **Hi, John** + avatar → dropdown: **View reservations**, **Log out**
+5. `/reservations` shows a **table** of your bookings
+
+**Host test:** log in as `jane@example.com` / password321 → table shows guest bookings on her listings.
+
 ### Day 14 — future getaways + footers (Home page complete)
 
 Scroll to the bottom of [http://localhost:5173](http://localhost:5173):

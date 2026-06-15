@@ -1,0 +1,68 @@
+.reservations-page__main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.reservations-page__header h1 {
+  margin: 0 0 0.35rem;
+  font-size: 1.75rem;
+}
+
+.reservations-page__header p {
+  margin: 0 0 1.5rem;
+  color: #717171;
+}
+
+.reservations-page__message {
+  color: #717171;
+}
+
+.reservations-page__message a {
+  color: #ff385c;
+}
+
+.reservations-page__error {
+  color: #c13515;
+}
+
+.reservations-page__table-wrap {
+  overflow-x: auto;
+  border: 1px solid #ebebeb;
+  border-radius: 12px;
+}
+
+.reservations-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.reservations-table th,
+.reservations-table td {
+  padding: 0.85rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid #ebebeb;
+}
+
+.reservations-table th {
+  background: #f7f7f7;
+  font-weight: 600;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: #717171;
+}
+
+.reservations-table tbody tr:hover {
+  background: #fafafa;
+}
+
+.reservations-table a {
+  color: #222;
+  font-weight: 500;
+}
+
+.reservations-table a:hover {
+  color: #ff385c;
+}

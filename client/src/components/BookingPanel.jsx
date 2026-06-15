@@ -1,13 +1,13 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { Link } from "react-router-dom";
 import {
   apiPost,
   calculateBookingTotal,
   calculateNights,
-  clearAuth,
-  getStoredUser,
   getToken,
   loginUser,
 } from "../api/client";
+import { useAuth } from "../context/AuthContext";
 import "./BookingPanel.css";
 
 function defaultCheckIn() {
@@ -27,16 +27,20 @@ function defaultCheckOut() {
  * Why: Brief requires dynamic price breakdown and reservation on Location Details.
  */
 export default function BookingPanel({ listing }) {
+  const { user, isLoggedIn, setAuth, logout } = useAuth();
   const [checkIn, setCheckIn] = useState(defaultCheckIn);
   const [checkOut, setCheckOut] = useState(defaultCheckOut);
   const [guests, setGuests] = useState(1);
-  const [user, setUser] = useState(getStoredUser());
-  const [showLogin, setShowLogin] = useState(!getToken());
+  const [showLogin, setShowLogin] = useState(!isLoggedIn);
   const [email, setEmail] = useState("john@example.com");
   const [password, setPassword] = useState("password123");
   const [status, setStatus] = useState("");
   const [error, setError] = useState("");
   const [submitting, setSubmitting] = useState(false);
+
+  useEffect(() => {
+    setShowLogin(!isLoggedIn);
+  }, [isLoggedIn]);
 
   const nights = useMemo(() => {
     if (!checkIn || !checkOut) return 0;
@@ -55,7 +59,7 @@ export default function BookingPanel({ listing }) {
 
     try {
       const data = await loginUser(email, password);
-      setUser(data.user);
+      setAuth(data.token, data.user);
       setShowLogin(false);
       setStatus(`Logged in as ${data.user.username}`);
     } catch (err) {
@@ -64,8 +68,7 @@ export default function BookingPanel({ listing }) {
   }
 
   function handleLogout() {
-    clearAuth();
-    setUser(null);
+    logout();
     setShowLogin(true);
     setStatus("");
   }
@@ -195,6 +198,10 @@ export default function BookingPanel({ listing }) {
             <button type="button" className="booking-panel__link" onClick={handleLogout}>
               Log out
             </button>
+            {" · "}
+            <Link to="/reservations" className="booking-panel__link">
+              View reservations
+            </Link>
           </p>
         )}
 

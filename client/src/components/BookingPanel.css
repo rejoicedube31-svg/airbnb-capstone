@@ -108,6 +108,10 @@
   padding: 0;
 }
 
+a.booking-panel__link {
+  display: inline;
+}
+
 .booking-panel__login {
   border: 1px solid #ebebeb;
   border-radius: 12px;

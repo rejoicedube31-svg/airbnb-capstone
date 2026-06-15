@@ -18,11 +18,13 @@ export function getStoredUser() {
 export function saveAuth(token, user) {
   localStorage.setItem(TOKEN_KEY, token);
   localStorage.setItem(USER_KEY, JSON.stringify(user));
+  window.dispatchEvent(new Event("auth-changed"));
 }
 
 export function clearAuth() {
   localStorage.removeItem(TOKEN_KEY);
   localStorage.removeItem(USER_KEY);
+  window.dispatchEvent(new Event("auth-changed"));
 }
 
 async function parseResponse(response) {
