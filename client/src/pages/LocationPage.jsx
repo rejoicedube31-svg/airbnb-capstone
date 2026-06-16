@@ -1,16 +1,12 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import Header from "../components/Header";
+import PageLayout from "../components/PageLayout";
 import LocationListingRow from "../components/LocationListingRow";
 import { apiGet } from "../api/client";
 import "./LocationPage.css";
 
 const DEFAULT_LOCATION = "Centurion";
 
-/**
- * Location page — filter, heading, horizontal listing cards from API.
- * Why: Brief requires a dedicated view when guests search a destination.
- */
 export default function LocationPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const location = searchParams.get("location") || DEFAULT_LOCATION;
@@ -38,12 +34,7 @@ export default function LocationPage() {
   }
 
   return (
-    <div className="location-page">
-      <Header
-        locationValue={location}
-        onLocationSearch={(value) => setSearchParams({ location: value.trim() || DEFAULT_LOCATION })}
-      />
-
+    <PageLayout headerProps={{ locationValue: location, onLocationSearch: (value) => setSearchParams({ location: value.trim() || DEFAULT_LOCATION }) }}>
       <main className="location-page__main">
         <form className="location-page__filter" onSubmit={handleFilterSubmit}>
           <label htmlFor="location-filter">Location filter</label>
@@ -60,9 +51,13 @@ export default function LocationPage() {
         </form>
 
         <header className="location-page__heading">
-          <h1>
-            {listings.length} accommodation{listings.length === 1 ? "" : "s"} in {location}
-          </h1>
+          {loading ? (
+            <h1>Loading stays in {location}…</h1>
+          ) : (
+            <h1>
+              {listings.length} accommodation{listings.length === 1 ? "" : "s"} in {location}
+            </h1>
+          )}
           <p>Stays in {location}, Gauteng, South Africa</p>
         </header>
 
@@ -87,6 +82,6 @@ export default function LocationPage() {
             ))}
         </div>
       </main>
-    </div>
+    </PageLayout>
   );
 }

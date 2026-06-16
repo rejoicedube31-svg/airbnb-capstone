@@ -138,6 +138,14 @@
   .header__search {
     display: none;
   }
+
+  .header__host-link {
+    display: none;
+  }
+
+  .header__greeting {
+    display: none;
+  }
 }
 
 .header__search input {

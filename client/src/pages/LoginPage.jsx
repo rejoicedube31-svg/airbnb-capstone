@@ -1,16 +1,10 @@
 import { useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-import CopyrightFooter from "../components/CopyrightFooter";
+import PageLayout from "../components/PageLayout";
 import { loginUser } from "../api/client";
 import { useAuth } from "../context/AuthContext";
 import "./LoginPage.css";
 
-/**
- * Login page — email + password, redirect after success.
- * Why: Brief requires login from profile / header area.
- */
 export default function LoginPage() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -40,8 +34,7 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="login-page">
-      <Header />
+    <PageLayout>
       <main className="login-page__main">
         <form className="login-page__card" onSubmit={handleSubmit}>
           <h1>Log in</h1>
@@ -86,8 +79,6 @@ export default function LoginPage() {
           </Link>
         </form>
       </main>
-      <Footer />
-      <CopyrightFooter />
-    </div>
+    </PageLayout>
   );
 }

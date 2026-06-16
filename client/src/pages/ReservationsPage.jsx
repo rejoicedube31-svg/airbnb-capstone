@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-import CopyrightFooter from "../components/CopyrightFooter";
+import PageLayout from "../components/PageLayout";
 import { apiGet } from "../api/client";
 import { useAuth } from "../context/AuthContext";
 import "./ReservationsPage.css";
@@ -15,10 +13,6 @@ function formatDate(value) {
   });
 }
 
-/**
- * Reservations table — guest or host view from API.
- * Why: Brief requires profile option to view reservations in table format.
- */
 export default function ReservationsPage() {
   const { user, isLoggedIn } = useAuth();
   const navigate = useNavigate();
@@ -45,8 +39,7 @@ export default function ReservationsPage() {
   const isHost = user?.role === "host";
 
   return (
-    <div className="reservations-page">
-      <Header />
+    <PageLayout>
       <main className="reservations-page__main">
         <header className="reservations-page__header">
           <h1>{isHost ? "Reservations on your listings" : "Your reservations"}</h1>
@@ -95,11 +88,7 @@ export default function ReservationsPage() {
                       )}
                     </td>
                     <td>{row.accommodation?.location || "—"}</td>
-                    {isHost && (
-                      <td>
-                        {row.user?.username || row.user?.email || "—"}
-                      </td>
-                    )}
+                    {isHost && <td>{row.user?.username || row.user?.email || "—"}</td>}
                     <td>{formatDate(row.checkIn)}</td>
                     <td>{formatDate(row.checkOut)}</td>
                     <td>{row.guests}</td>
@@ -112,8 +101,6 @@ export default function ReservationsPage() {
           </div>
         )}
       </main>
-      <Footer />
-      <CopyrightFooter />
-    </div>
+    </PageLayout>
   );
 }

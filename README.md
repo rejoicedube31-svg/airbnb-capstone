@@ -310,6 +310,15 @@ Verify: log in as Jane in API or check Atlas `reservations` collection.
 
 **Host test:** log in as `jane@example.com` / password321 → table shows guest bookings on her listings.
 
+### Day 19 — client polish + rubric pass
+
+1. Walk through `client/FRONTEND-RUBRIC.md` — tick each item in the browser
+2. Test **mobile width** (DevTools → 375px): home, locations, listing details, login, reservations
+3. Every page now uses **PageLayout** — footer + copyright on all views
+4. Route changes **scroll to top** automatically
+
+**Public client is feature-complete for the brief.** Next: **Day 20** — start `admin/` React app.
+
 ### Day 14 — future getaways + footers (Home page complete)
 
 Scroll to the bottom of [http://localhost:5173](http://localhost:5173):

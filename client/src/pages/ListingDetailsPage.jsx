@@ -1,17 +1,12 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-import CopyrightFooter from "../components/CopyrightFooter";
+import PageLayout from "../components/PageLayout";
 import ListingGallery from "../components/ListingGallery";
 import ListingDetailsInfo from "../components/ListingDetailsInfo";
 import BookingPanel from "../components/BookingPanel";
 import { apiGet } from "../api/client";
 import "./ListingDetailsPage.css";
 
-/**
- * Location Details page — gallery, static info, booking panel (calculator Day 17).
- */
 export default function ListingDetailsPage() {
   const { id } = useParams();
   const [listing, setListing] = useState(null);
@@ -29,9 +24,7 @@ export default function ListingDetailsPage() {
   }, [id]);
 
   return (
-    <div className="listing-details">
-      <Header locationValue={listing?.location || "Centurion"} />
-
+    <PageLayout headerProps={{ locationValue: listing?.location || "Centurion" }}>
       <main className="listing-details__main">
         {loading && <p className="listing-details__message">Loading listing…</p>}
         {error && (
@@ -73,9 +66,6 @@ export default function ListingDetailsPage() {
           </>
         )}
       </main>
-
-      <Footer />
-      <CopyrightFooter />
-    </div>
+    </PageLayout>
   );
 }
