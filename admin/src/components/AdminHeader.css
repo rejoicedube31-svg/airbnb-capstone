@@ -1,0 +1,147 @@
+.admin-header {
+  border-bottom: 1px solid #ebebeb;
+  background: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.admin-header__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.admin-header__logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: #ff385c;
+  font-weight: 700;
+  font-size: 1.05rem;
+  text-decoration: none;
+}
+
+.admin-header__nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex: 1;
+}
+
+.admin-header__nav a {
+  color: #222;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 8px 0;
+  border-bottom: 2px solid transparent;
+}
+
+.admin-header__nav a.active,
+.admin-header__nav a:hover {
+  color: #ff385c;
+}
+
+.admin-header__nav a.active {
+  border-bottom-color: #ff385c;
+}
+
+.admin-header__link {
+  color: #717171;
+}
+
+.admin-header__actions {
+  margin-left: auto;
+}
+
+.admin-header__host-cta {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 16px;
+  border-radius: 24px;
+  border: 1px solid #222;
+  color: #222;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.admin-header__host-cta:hover {
+  background: #f7f7f7;
+}
+
+.admin-header__profile {
+  position: relative;
+}
+
+.admin-header__profile-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid #ddd;
+  border-radius: 24px;
+  padding: 6px 12px 6px 6px;
+  background: #fff;
+  cursor: pointer;
+}
+
+.admin-header__avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #ff385c;
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+
+.admin-header__greeting {
+  font-weight: 600;
+  color: #222;
+}
+
+.admin-header__dropdown {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 8px);
+  min-width: 200px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.12);
+  overflow: hidden;
+}
+
+.admin-header__dropdown a,
+.admin-header__dropdown button {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 12px 16px;
+  border: 0;
+  background: none;
+  color: #222;
+  text-decoration: none;
+  font: inherit;
+  cursor: pointer;
+}
+
+.admin-header__dropdown a:hover,
+.admin-header__dropdown button:hover {
+  background: #f7f7f7;
+}
+
+@media (max-width: 720px) {
+  .admin-header__nav {
+    display: none;
+  }
+
+  .admin-header__greeting {
+    display: none;
+  }
+}
