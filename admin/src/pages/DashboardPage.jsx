@@ -12,7 +12,7 @@ export default function DashboardPage() {
       <main className="dashboard">
         <section className="dashboard__hero">
           <p className="dashboard__eyebrow">Host dashboard</p>
-          <h1>Welcome back, {user?.name?.split(" ")[0] || "Host"}</h1>
+          <h1>Welcome back, {user?.username?.split(" ")[0] || "Host"}</h1>
           <p className="dashboard__lead">
             Manage your Centurion listings, upload photos, and review guest reservations from one place.
           </p>
@@ -25,7 +25,6 @@ export default function DashboardPage() {
             <Link to="/listings" className="dashboard__cta">
               Manage listings
             </Link>
-            <span className="dashboard__badge">Day 21</span>
           </article>
 
           <article className="dashboard__card">

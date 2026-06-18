@@ -3,6 +3,8 @@ import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 import LoginPage from "./pages/LoginPage";
 import DashboardPage from "./pages/DashboardPage";
+import ListingsPage from "./pages/ListingsPage";
+import ListingFormPage from "./pages/ListingFormPage";
 import PlaceholderPage from "./pages/PlaceholderPage";
 
 export default function App() {
@@ -23,11 +25,23 @@ export default function App() {
             path="/listings"
             element={
               <ProtectedRoute>
-                <PlaceholderPage
-                  title="Manage listings"
-                  description="Listing create, edit, delete, and image upload screens arrive on Day 21."
-                  dayLabel="Coming Day 21"
-                />
+                <ListingsPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/listings/new"
+            element={
+              <ProtectedRoute>
+                <ListingFormPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/listings/:id/edit"
+            element={
+              <ProtectedRoute>
+                <ListingFormPage />
               </ProtectedRoute>
             }
           />

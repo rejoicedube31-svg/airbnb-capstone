@@ -52,9 +52,9 @@ export default function AdminHeader() {
                 aria-haspopup="menu"
               >
                 <span className="admin-header__avatar" aria-hidden="true">
-                  {user?.name?.charAt(0)?.toUpperCase() || "H"}
+                  {user?.username?.charAt(0)?.toUpperCase() || "H"}
                 </span>
-                <span className="admin-header__greeting">Hi, {user?.name?.split(" ")[0] || "Host"}</span>
+                <span className="admin-header__greeting">Hi, {user?.username?.split(" ")[0] || "Host"}</span>
               </button>
 
               {menuOpen && (

@@ -1,0 +1,119 @@
+.listing-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.listing-form__section {
+  background: #fff;
+  border: 1px solid #ebebeb;
+  border-radius: 16px;
+  padding: 24px;
+}
+
+.listing-form__section h2 {
+  margin: 0 0 16px;
+  font-size: 1.1rem;
+}
+
+.listing-form__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.listing-form__full {
+  grid-column: 1 / -1;
+}
+
+.listing-form__grid label,
+.listing-form__checks label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-weight: 600;
+  color: #222;
+}
+
+.listing-form__checks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.listing-form__checks label {
+  flex-direction: row;
+  align-items: center;
+  font-weight: 500;
+}
+
+.listing-form__grid input,
+.listing-form__grid textarea {
+  padding: 12px 14px;
+  border: 1px solid #b0b0b0;
+  border-radius: 8px;
+  font: inherit;
+}
+
+.listing-form__grid input:focus,
+.listing-form__grid textarea:focus {
+  outline: 2px solid #ff385c;
+  border-color: #ff385c;
+}
+
+.listing-form__hint {
+  margin: 0 0 12px;
+  color: #717171;
+}
+
+.listing-form__upload {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  border: 1px dashed #b0b0b0;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.listing-form__upload input {
+  display: none;
+}
+
+.listing-form__images {
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 12px;
+}
+
+.listing-form__image-card {
+  margin: 0;
+  border: 1px solid #ebebeb;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.listing-form__image-card img {
+  width: 100%;
+  height: 100px;
+  object-fit: cover;
+  display: block;
+}
+
+.listing-form__image-card button {
+  width: 100%;
+  border: 0;
+  background: #fafafa;
+  padding: 8px;
+  cursor: pointer;
+  color: #c13515;
+  font-weight: 600;
+}
+
+.listing-form__actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}

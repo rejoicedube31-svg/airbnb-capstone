@@ -66,6 +66,82 @@ export async function apiPost(path, body, auth = false) {
   return parseResponse(response);
 }
 
+export async function apiPut(path, body, auth = false) {
+  const headers = { "Content-Type": "application/json" };
+
+  if (auth) {
+    const token = getToken();
+    if (!token) throw new Error("Not logged in");
+    headers.Authorization = `Bearer ${token}`;
+  }
+
+  const response = await fetch(`${API_URL}${path}`, {
+    method: "PUT",
+    headers,
+    body: JSON.stringify(body),
+  });
+
+  return parseResponse(response);
+}
+
+export async function apiDelete(path, auth = false) {
+  const headers = {};
+
+  if (auth) {
+    const token = getToken();
+    if (!token) throw new Error("Not logged in");
+    headers.Authorization = `Bearer ${token}`;
+  }
+
+  const response = await fetch(`${API_URL}${path}`, {
+    method: "DELETE",
+    headers,
+  });
+
+  return parseResponse(response);
+}
+
+export async function uploadListingImage(file) {
+  const token = getToken();
+  if (!token) throw new Error("Not logged in");
+
+  const formData = new FormData();
+  formData.append("image", file);
+
+  const response = await fetch(`${API_URL}/api/accommodations/upload`, {
+    method: "POST",
+    headers: { Authorization: `Bearer ${token}` },
+    body: formData,
+  });
+
+  return parseResponse(response);
+}
+
+export async function fetchListings(location = "") {
+  const query = location ? `?location=${encodeURIComponent(location)}` : "";
+  const data = await apiGet(`/api/accommodations${query}`);
+  return data.data || [];
+}
+
+export async function fetchListing(id) {
+  const data = await apiGet(`/api/accommodations/${id}`);
+  return data.data;
+}
+
+export async function createListing(body) {
+  const data = await apiPost("/api/accommodations", body, true);
+  return data.data;
+}
+
+export async function updateListing(id, body) {
+  const data = await apiPut(`/api/accommodations/${id}`, body, true);
+  return data.data;
+}
+
+export async function deleteListing(id) {
+  return apiDelete(`/api/accommodations/${id}`, true);
+}
+
 export async function loginHost(email, password) {
   const data = await apiPost("/api/users/login", { email, password });
   if (data.user?.role !== "host") {
