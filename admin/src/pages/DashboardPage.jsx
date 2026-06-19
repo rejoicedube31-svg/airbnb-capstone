@@ -33,7 +33,6 @@ export default function DashboardPage() {
             <Link to="/reservations" className="dashboard__cta">
               View reservations
             </Link>
-            <span className="dashboard__badge">Day 22</span>
           </article>
 
           <article className="dashboard__card dashboard__card--muted">

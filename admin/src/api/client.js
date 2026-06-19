@@ -142,6 +142,15 @@ export async function deleteListing(id) {
   return apiDelete(`/api/accommodations/${id}`, true);
 }
 
+export async function fetchHostReservations() {
+  const data = await apiGet("/api/reservations/host", true);
+  return data.data || [];
+}
+
+export async function cancelReservation(id) {
+  return apiDelete(`/api/reservations/${id}`, true);
+}
+
 export async function loginHost(email, password) {
   const data = await apiPost("/api/users/login", { email, password });
   if (data.user?.role !== "host") {

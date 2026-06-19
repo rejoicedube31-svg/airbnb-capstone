@@ -5,7 +5,7 @@ import LoginPage from "./pages/LoginPage";
 import DashboardPage from "./pages/DashboardPage";
 import ListingsPage from "./pages/ListingsPage";
 import ListingFormPage from "./pages/ListingFormPage";
-import PlaceholderPage from "./pages/PlaceholderPage";
+import ReservationsPage from "./pages/ReservationsPage";
 
 export default function App() {
   return (
@@ -49,11 +49,7 @@ export default function App() {
             path="/reservations"
             element={
               <ProtectedRoute>
-                <PlaceholderPage
-                  title="Host reservations"
-                  description="A reservations table for your properties will be added on Day 22."
-                  dayLabel="Coming Day 22"
-                />
+                <ReservationsPage />
               </ProtectedRoute>
             }
           />
