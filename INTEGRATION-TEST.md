@@ -150,4 +150,4 @@ You are integration-ready when:
 4. Changes in admin appear on the public client  
 5. Mobile layouts are usable at 375px  
 
-Next: **Day 24** — final README polish and submission prep.
+Next: **Day 25** — final rubric gap review and buffer before due date.

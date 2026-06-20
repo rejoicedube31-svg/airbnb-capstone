@@ -127,7 +127,9 @@ backend/
 
 ## Submitting to your course
 
-Include in README or submission notes:
+**Start here:** [../SUBMISSION.md](../SUBMISSION.md) — full setup for markers, demo accounts, demo flow, and pre-submission checklist.
+
+Also include:
 
 - GitHub repo URL
 - How to run backend (`npm install`, `.env`, `npm run seed`, `npm start`)

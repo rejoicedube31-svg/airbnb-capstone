@@ -4,6 +4,9 @@ Full-stack Airbnb clone for the web development capstone (due 27 June 2026).
 
 **Demo location:** Centurion, Gauteng, South Africa — used in seed data and examples.
 
+**GitHub:** https://github.com/rejoicedube31-svg/airbnb-capstone  
+**For markers:** start with [SUBMISSION.md](./SUBMISSION.md) — setup, demo accounts, and demo flow.
+
 ## Project layout
 
 | Folder     | Purpose                                      |
@@ -58,7 +61,7 @@ Open http://localhost:5174 — log in as **jane@example.com** / password321
    ```
 2. Copy environment file and set your MongoDB URL:
    ```powershell
-   copy ..\.env.example .env
+   copy .env.example .env
    ```
    Edit `backend/.env` — use your Atlas connection string or local `mongodb://127.0.0.1:27017/airbnb-capstone`.
 3. Run the seed script:
@@ -426,4 +429,11 @@ Verify on public client: new listing appears on Home or Location page.
    - `client/FRONTEND-RUBRIC.md`
    - `admin/ADMIN-RUBRIC.md`
 
-**Next: Day 24** — final README polish and submission prep.
+### Day 24 — submission prep
+
+1. Read [SUBMISSION.md](./SUBMISSION.md) — marker setup, demo flow, pre-submission checklist
+2. Confirm GitHub repo is public/up to date
+3. Replace placeholder `JWT_SECRET` in `backend/.env`
+4. Prepare what to submit to your course (repo URL + Centurion demo note)
+
+**Next: Day 25** — final rubric gap review and buffer before due date (27 June 2026).
