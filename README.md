@@ -15,7 +15,37 @@ Full-stack Airbnb clone for the web development capstone (due 27 June 2026).
 ## Stack
 
 - **Backend:** Node.js, Express, Mongoose, JWT — **complete** (see `backend/API.md`)
-- **Frontend:** React, CSS — **Day 11 started** (`client/`)
+- **Client:** React + Vite public site — **complete** (see `client/FRONTEND-RUBRIC.md`)
+- **Admin:** React + Vite host dashboard — **complete** (see `admin/ADMIN-RUBRIC.md`)
+
+## Run the full stack (3 terminals)
+
+**Terminal 1 — API**
+
+```powershell
+cd C:\Users\rejoi\Projects\airbnb-capstone\backend
+npm start
+```
+
+**Terminal 2 — Public client**
+
+```powershell
+cd C:\Users\rejoi\Projects\airbnb-capstone\client
+npm run dev
+```
+
+Open http://localhost:5173
+
+**Terminal 3 — Admin dashboard**
+
+```powershell
+cd C:\Users\rejoi\Projects\airbnb-capstone\admin
+npm run dev
+```
+
+Open http://localhost:5174 — log in as **jane@example.com** / password321
+
+**Integration checklist:** see [INTEGRATION-TEST.md](./INTEGRATION-TEST.md)
 
 ## Getting started
 
@@ -355,3 +385,45 @@ Click any listing from Home or Location page, or open an id directly:
 - Left column: about, sleep, amenities, 7 nights, reviews, host, policies
 - Right column: price card (full calculator on Day 17)
 - Footer + copyright at bottom
+
+### Day 20 — admin app shell
+
+```powershell
+cd C:\Users\rejoi\Projects\airbnb-capstone\admin
+copy .env.example .env
+npm install
+npm run dev
+```
+
+Open http://localhost:5174
+
+- [x] Host login (jane@example.com / password321)
+- [x] Protected dashboard — redirects to login when logged out
+- [x] Header: logged out vs logged in states
+
+### Day 21 — admin listing CRUD
+
+Log in as Jane on http://localhost:5174
+
+- [x] `/listings` — table of your listings
+- [x] Create, edit, delete listings
+- [x] Upload images → `/uploads/...` on listing
+
+Verify on public client: new listing appears on Home or Location page.
+
+### Day 22 — admin host reservations
+
+- [x] `/reservations` — bookings on Jane’s listings
+- [x] Guest name, dates, nights, total
+- [x] Cancel booking (optional)
+
+### Day 23 — full-stack integration test
+
+1. Start all three apps (see **Run the full stack** above)
+2. Backend: `npm run test:api` → all **PASS**
+3. Walk through [INTEGRATION-TEST.md](./INTEGRATION-TEST.md)
+4. Tick checklists in:
+   - `client/FRONTEND-RUBRIC.md`
+   - `admin/ADMIN-RUBRIC.md`
+
+**Next: Day 24** — final README polish and submission prep.

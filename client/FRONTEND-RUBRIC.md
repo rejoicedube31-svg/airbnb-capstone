@@ -54,8 +54,9 @@ Backend must run for API features: `cd backend && npm start`
 - [ ] Run through all pages on mobile width (375px)
 - [ ] Test John login + reserve + view reservations
 - [ ] Test Jane host reservations table
+- [ ] Walk through `../INTEGRATION-TEST.md`
 - [ ] Commit and push `client/` changes
 
-## Next: admin app (`admin/` folder)
+## Admin app (`admin/` folder)
 
-Separate React app for host dashboard — Days 20+.
+Host dashboard is complete — see `admin/ADMIN-RUBRIC.md` and `../INTEGRATION-TEST.md`.
