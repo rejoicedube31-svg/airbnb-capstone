@@ -1,23 +1,27 @@
 .discover {
-  padding: 2.5rem 2rem;
+  padding: 0 2rem 2.5rem;
+  max-width: 1280px;
+  margin: 0 auto;
 }
 
-.discover h2 {
+.discover__title {
   margin: 0 0 1.5rem;
-  font-size: 1.6rem;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #222;
 }
 
 .discover__grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.25rem;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
 }
 
 .discover__card {
   position: relative;
-  border-radius: 16px;
+  border-radius: 12px;
   overflow: hidden;
-  min-height: 280px;
+  min-height: 380px;
 }
 
 .discover__card img {
@@ -33,37 +37,59 @@
   position: relative;
   z-index: 1;
   height: 100%;
-  min-height: 280px;
+  min-height: 380px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  padding: 1.5rem;
-  background: linear-gradient(transparent, rgba(0, 0, 0, 0.75));
+  align-items: flex-start;
+  gap: 0.85rem;
+  padding: 1.75rem;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.05) 30%,
+    rgba(0, 0, 0, 0.55) 100%
+  );
   color: #fff;
 }
 
-.discover__overlay h3 {
-  margin: 0 0 0.5rem;
-  font-size: 1.25rem;
+.discover__heading {
+  margin: 0;
+  font-size: 1.65rem;
+  font-weight: 700;
+  line-height: 1.2;
+  max-width: 280px;
 }
 
-.discover__overlay p {
-  margin: 0 0 1rem;
-  font-size: 0.95rem;
-  opacity: 0.95;
-}
-
-.discover__overlay button {
-  align-self: flex-start;
+.discover__pill {
   border: none;
-  background: #fff;
+  background: rgba(255, 255, 255, 0.92);
   color: #222;
+  font-size: 0.875rem;
   font-weight: 600;
-  padding: 0.65rem 1.1rem;
-  border-radius: 8px;
+  padding: 0.55rem 1rem;
+  border-radius: 999px;
   cursor: pointer;
 }
 
-.discover__overlay button:hover {
-  background: #f7f7f7;
+.discover__pill:hover {
+  background: #fff;
+}
+
+@media (max-width: 768px) {
+  .discover {
+    padding: 0 1rem 2rem;
+  }
+
+  .discover__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .discover__card,
+  .discover__overlay {
+    min-height: 320px;
+  }
+
+  .discover__heading {
+    font-size: 1.35rem;
+  }
 }
