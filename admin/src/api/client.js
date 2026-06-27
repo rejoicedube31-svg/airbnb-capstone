@@ -161,8 +161,10 @@ export async function loginHost(email, password) {
 }
 
 export function imageUrl(path) {
+  const clientUrl = import.meta.env.VITE_CLIENT_URL || "http://localhost:5173";
   if (!path) return "";
   if (path.startsWith("http")) return path;
   if (path.startsWith("/uploads/")) return `${API_URL}${path}`;
+  if (path.startsWith("/images/")) return `${clientUrl}${path}`;
   return path;
 }

@@ -14,14 +14,15 @@ const REQUIRED_FIELDS = [
 
 /**
  * GET /api/accommodations
- * Optional query: ?location=Centurion
+ * Optional query: ?location=Cape Town
  * Why: Public site lists properties; location filter matches the Location Page brief.
  */
 async function getAllAccommodations(req, res) {
   const filter = {};
 
-  if (req.query.location) {
-    filter.location = { $regex: req.query.location.trim(), $options: "i" };
+  const locationQuery = req.query.location?.trim();
+  if (locationQuery && locationQuery.toLowerCase() !== "all") {
+    filter.location = { $regex: locationQuery, $options: "i" };
   }
 
   const accommodations = await Accommodation.find(filter).sort({ createdAt: -1 });

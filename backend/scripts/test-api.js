@@ -61,10 +61,10 @@ async function run() {
     listingId = data.data[0]._id;
   });
 
-  await test("GET /api/accommodations?location=Centurion", async () => {
-    const { response, data } = await request("/api/accommodations?location=Centurion");
+  await test("GET /api/accommodations?location=Cape Town", async () => {
+    const { response, data } = await request("/api/accommodations?location=Cape Town");
     assert(response.ok, data.message);
-    assert(data.count >= 1, "Expected Centurion listings");
+    assert(data.count >= 1, "Expected Cape Town listings");
   });
 
   await test("GET /api/accommodations/:id", async () => {
@@ -73,16 +73,16 @@ async function run() {
     assert(data.data._id === listingId, "Wrong listing returned");
   });
 
-  await test("POST /api/users/login (John)", async () => {
-    const data = await login("john@example.com", "password123");
+  await test("POST /api/users/login (Jannie)", async () => {
+    const data = await login("jannie@example.com", "password123");
     johnToken = data.token;
-    assert(data.user.role === "user", "John should be user role");
+    assert(data.user.role === "user", "Jannie should be user role");
   });
 
-  await test("POST /api/users/login (Jane)", async () => {
-    const data = await login("jane@example.com", "password321");
+  await test("POST /api/users/login (Lerato)", async () => {
+    const data = await login("lerato@example.com", "password321");
     janeToken = data.token;
-    assert(data.user.role === "host", "Jane should be host role");
+    assert(data.user.role === "host", "Lerato should be host role");
   });
 
   await test("GET /api/users/me (with token)", async () => {
@@ -140,10 +140,10 @@ async function run() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        title: "API Test Cottage Centurion",
+        title: "API Test Cottage Cape Town",
         description: "Temporary test listing from test:api script.",
         type: "Entire house",
-        location: "Centurion",
+        location: "Cape Town",
         guests: 2,
         bedrooms: 1,
         bathrooms: 1,

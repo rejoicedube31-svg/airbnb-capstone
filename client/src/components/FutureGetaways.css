@@ -1,65 +1,92 @@
 .getaways {
-  padding: 2.5rem 2rem;
+  width: 100%;
+  padding: 2.5rem var(--home-gutter, 2rem) 2rem;
   border-top: 1px solid #ebebeb;
+  box-sizing: border-box;
 }
 
-.getaways h2 {
-  margin: 0 0 1.25rem;
-  font-size: 1.6rem;
+.getaways__title {
+  margin: 0 0 1.5rem;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #222;
 }
 
 .getaways__tabs {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-bottom: 1.25rem;
-}
-
-.getaways__tab {
-  border: 1px solid #ddd;
-  background: #fff;
-  padding: 0.5rem 1rem;
-  border-radius: 999px;
-  font-size: 0.9rem;
-  font-weight: 500;
-  cursor: pointer;
-  color: #222;
-}
-
-.getaways__tab.active {
-  background: #222;
-  color: #fff;
-  border-color: #222;
-}
-
-.getaways__list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  gap: 0.75rem;
-  max-width: 640px;
-}
-
-.getaways__list li {
-  display: flex;
-  flex-direction: column;
-  gap: 0.15rem;
-  padding-bottom: 0.75rem;
+  gap: 0 1.75rem;
+  margin-bottom: 1.5rem;
   border-bottom: 1px solid #ebebeb;
 }
 
-.getaways__list a {
+.getaways__tab {
+  border: 0;
+  background: transparent;
+  padding: 0 0 0.85rem;
+  margin-bottom: -1px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  color: #717171;
+  white-space: nowrap;
+  border-bottom: 2px solid transparent;
+}
+
+.getaways__tab:hover {
+  color: #222;
+}
+
+.getaways__tab--active {
+  color: #222;
   font-weight: 600;
+  border-bottom-color: #222;
+}
+
+.getaways__grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.getaways__item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.getaways__item a {
+  font-weight: 600;
+  font-size: 0.95rem;
   color: #222;
   text-decoration: none;
 }
 
-.getaways__list a:hover {
+.getaways__item a:hover {
   text-decoration: underline;
 }
 
-.getaways__list span {
+.getaways__item span {
   font-size: 0.9rem;
   color: #717171;
+}
+
+@media (max-width: 900px) {
+  .getaways__tabs {
+    gap: 0 1.25rem;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding-bottom: 0.25rem;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .getaways__tab {
+    flex-shrink: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .getaways {
+    padding: 2rem var(--home-gutter, 1rem) 1.5rem;
+  }
 }

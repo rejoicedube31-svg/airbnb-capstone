@@ -65,6 +65,27 @@ export async function apiPost(path, body, auth = false) {
   return parseResponse(response);
 }
 
+export async function apiDelete(path, auth = false) {
+  const headers = {};
+
+  if (auth) {
+    const token = getToken();
+    if (!token) throw new Error("Not logged in");
+    headers.Authorization = `Bearer ${token}`;
+  }
+
+  const response = await fetch(`${API_URL}${path}`, {
+    method: "DELETE",
+    headers,
+  });
+
+  return parseResponse(response);
+}
+
+export async function cancelReservation(id) {
+  return apiDelete(`/api/reservations/${id}`, true);
+}
+
 export async function loginUser(email, password) {
   const data = await apiPost("/api/users/login", { email, password });
   saveAuth(data.token, data.user);
@@ -82,7 +103,7 @@ export function listingImageUrl(path, index = 0) {
   if (!path) return localPlaceholder(index);
   if (path.startsWith("http")) return path;
   if (path.startsWith("/uploads/")) return `${API_URL}${path}`;
-  if (path.startsWith("/images/")) return localPlaceholder(index);
+  if (path.startsWith("/images/")) return path;
   return localPlaceholder(index);
 }
 

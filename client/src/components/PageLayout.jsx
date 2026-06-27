@@ -7,10 +7,15 @@ import "./PageLayout.css";
  * Shared page shell — header, main content, footers.
  * Why: Consistent layout + footers on every public view (rubric).
  */
-export default function PageLayout({ children, headerProps = {} }) {
+export default function PageLayout({
+  children,
+  headerProps = {},
+  headerVariant = "default",
+  layoutClass = "",
+}) {
   return (
-    <div className="page-layout">
-      <Header {...headerProps} />
+    <div className={`page-layout${layoutClass ? ` ${layoutClass}` : ""}`}>
+      <Header variant={headerVariant} {...headerProps} />
       {children}
       <Footer />
       <CopyrightFooter />

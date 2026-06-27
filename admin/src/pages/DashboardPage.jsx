@@ -14,7 +14,7 @@ export default function DashboardPage() {
           <p className="dashboard__eyebrow">Host dashboard</p>
           <h1>Welcome back, {user?.username?.split(" ")[0] || "Host"}</h1>
           <p className="dashboard__lead">
-            Manage your Centurion listings, upload photos, and review guest reservations from one place.
+            Manage your listings, upload photos, and review guest reservations from one place.
           </p>
         </section>
 
@@ -29,7 +29,7 @@ export default function DashboardPage() {
 
           <article className="dashboard__card">
             <h2>Reservations</h2>
-            <p>See who booked your listings and track upcoming stays in Centurion.</p>
+            <p>See who booked your listings and track upcoming stays.</p>
             <Link to="/reservations" className="dashboard__cta">
               View reservations
             </Link>

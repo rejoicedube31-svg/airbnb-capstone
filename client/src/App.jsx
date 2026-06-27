@@ -17,6 +17,7 @@ export default function App() {
         <Route path="/listings/:id" element={<ListingDetailsPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/reservations" element={<ReservationsPage />} />
+        <Route path="/view-reservations" element={<ReservationsPage />} />
       </Routes>
     </>
   );

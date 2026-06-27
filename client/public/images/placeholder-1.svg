@@ -2,5 +2,5 @@
   <rect width="800" height="600" fill="#E8F4F8"/>
   <rect x="200" y="180" width="400" height="280" rx="8" fill="#FF385C" opacity="0.85"/>
   <polygon points="400,80 120,220 680,220" fill="#222"/>
-  <text x="400" y="520" text-anchor="middle" font-family="Arial,sans-serif" font-size="28" fill="#484848">Centurion stay</text>
+  <text x="400" y="520" text-anchor="middle" font-family="Arial,sans-serif" font-size="28" fill="#484848">Cape Town stay</text>
 </svg>

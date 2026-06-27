@@ -4,6 +4,11 @@
   box-sizing: border-box;
 }
 
+:root {
+  --admin-content-max: min(1600px, 96vw);
+  --admin-gutter: clamp(0.75rem, 1.5vw, 1.25rem);
+}
+
 html,
 body,
 #root {

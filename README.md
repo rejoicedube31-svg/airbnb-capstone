@@ -1,8 +1,9 @@
 # Airbnb Capstone
 
-Full-stack Airbnb clone for the web development capstone (due 27 June 2026).
+Full-stack Airbnb clone for the web development capstone (due 1 July 2026).
 
-**Demo location:** Centurion, Gauteng, South Africa — used in seed data and examples.
+**Demo location:** Cape Town, New York, Paris, Tokyo, Phuket — used in seed data and examples.  
+**Demo users:** Jannie (guest), Lerato (host).
 
 **GitHub:** https://github.com/rejoicedube31-svg/airbnb-capstone  
 **For markers:** start with [SUBMISSION.md](./SUBMISSION.md) — setup, demo accounts, and demo flow.
@@ -46,7 +47,7 @@ cd C:\Users\rejoi\Projects\airbnb-capstone\admin
 npm run dev
 ```
 
-Open http://localhost:5174 — log in as **jane@example.com** / password321
+Open http://localhost:5174 — log in as **lerato@example.com** / password321
 
 **Integration checklist:** see [INTEGRATION-TEST.md](./INTEGRATION-TEST.md)
 
@@ -97,7 +98,7 @@ You should see “MongoDB connected” and “Seed complete” with sample login
 3. **Login** (PowerShell):
 
    ```powershell
-   $body = @{ email = "jane@example.com"; password = "password321" } | ConvertTo-Json
+   $body = @{ email = "lerato@example.com"; password = "password321" } | ConvertTo-Json
    Invoke-RestMethod -Method Post -Uri "http://localhost:5000/api/users/login" -Body $body -ContentType "application/json"
    ```
 
@@ -110,7 +111,7 @@ You should see “MongoDB connected” and “Seed complete” with sample login
    Invoke-RestMethod -Uri "http://localhost:5000/api/users/me" -Headers $headers
    ```
 
-   Seed users: `john@example.com` / `password123`, `jane@example.com` / `password321`.
+   Seed users: `jannie@example.com` / `password123`, `lerato@example.com` / `password321`.
 
 ### Day 5 — accommodations (GET + POST)
 
@@ -121,23 +122,23 @@ You should see “MongoDB connected” and “Seed complete” with sample login
    Invoke-RestMethod -Uri "http://localhost:5000/api/accommodations"
    ```
 
-3. **Filter by location (Centurion, South Africa):**
+3. **Filter by location (Cape Town, South Africa):**
 
    ```powershell
-   Invoke-RestMethod -Uri "http://localhost:5000/api/accommodations?location=Centurion"
+   Invoke-RestMethod -Uri "http://localhost:5000/api/accommodations?location=Cape Town"
    ```
 
-4. **Create listing** (login as host Jane first, then POST with token):
+4. **Create listing** (login as host Lerato first, then POST with token):
 
    ```powershell
-   $login = @{ email = "jane@example.com"; password = "password321" } | ConvertTo-Json
+   $login = @{ email = "lerato@example.com"; password = "password321" } | ConvertTo-Json
    $auth = Invoke-RestMethod -Method Post -Uri "http://localhost:5000/api/users/login" -Body $login -ContentType "application/json"
 
    $listing = @{
-     title = "Family Home in Centurion"
-     description = "Quiet suburb in Centurion with garden and fast Wi-Fi."
+     title = "Family Home in Cape Town"
+     description = "Quiet suburb in Cape Town with garden and fast Wi-Fi."
      type = "Entire house"
-     location = "Centurion"
+     location = "Cape Town"
      guests = 6
      bedrooms = 3
      bathrooms = 2
@@ -152,16 +153,16 @@ You should see “MongoDB connected” and “Seed complete” with sample login
 
 ### Day 6 — update and delete listings
 
-Use the listing `_id` from GET (e.g. Family Home in Centurion). Replace `LISTING_ID` below.
+Use the listing `_id` from GET (e.g. Family Home in Cape Town). Replace `LISTING_ID` below.
 
 1. Window 1: `npm start`
-2. Window 2 — login as Jane (same as Day 5 Step 4)
+2. Window 2 — login as Lerato (same as Day 5 Step 4)
 3. **Get one listing** (browser): `http://localhost:5000/api/accommodations/LISTING_ID`
 4. **Update** (change price to 1100):
 
    ```powershell
    $headers = @{ Authorization = "Bearer $($auth.token)" }
-   $updates = @{ price = 1100; title = "Family Home in Centurion (Updated)" } | ConvertTo-Json
+   $updates = @{ price = 1100; title = "Family Home in Cape Town (Updated)" } | ConvertTo-Json
    Invoke-RestMethod -Method Put -Uri "http://localhost:5000/api/accommodations/LISTING_ID" -Body $updates -ContentType "application/json" -Headers $headers
    ```
 
@@ -176,13 +177,13 @@ Use the listing `_id` from GET (e.g. Family Home in Centurion). Replace `LISTING
 ### Day 7 — reservations
 
 1. Window 1: `npm start` (restart if server was already running)
-2. Window 2 — copy a listing `_id` from `http://localhost:5000/api/accommodations` (e.g. Modern Apartment in Centurion)
-3. **Book as John (guest):**
+2. Window 2 — copy a listing `_id` from `http://localhost:5000/api/accommodations` (e.g. Modern Apartment in Cape Town)
+3. **Book as Jannie (guest):**
 
    ```powershell
    $listingId = "PASTE_LISTING_ID_HERE"
 
-   $login = @{ email = "john@example.com"; password = "password123" } | ConvertTo-Json
+   $login = @{ email = "jannie@example.com"; password = "password123" } | ConvertTo-Json
    $john = Invoke-RestMethod -Method Post -Uri "http://localhost:5000/api/users/login" -Body $login -ContentType "application/json"
    $headers = @{ Authorization = "Bearer $($john.token)" }
 
@@ -197,16 +198,16 @@ Use the listing `_id` from GET (e.g. Family Home in Centurion). Replace `LISTING
    $newBooking
    ```
 
-4. **John sees his bookings:** `GET /api/reservations/user`
+4. **Jannie sees his bookings:** `GET /api/reservations/user`
 
    ```powershell
    Invoke-RestMethod -Uri "http://localhost:5000/api/reservations/user" -Headers $headers
    ```
 
-5. **Jane sees bookings on her listings:**
+5. **Lerato sees bookings on her listings:**
 
    ```powershell
-   $login = @{ email = "jane@example.com"; password = "password321" } | ConvertTo-Json
+   $login = @{ email = "lerato@example.com"; password = "password321" } | ConvertTo-Json
    $jane = Invoke-RestMethod -Method Post -Uri "http://localhost:5000/api/users/login" -Body $login -ContentType "application/json"
    $janeHeaders = @{ Authorization = "Bearer $($jane.token)" }
    Invoke-RestMethod -Uri "http://localhost:5000/api/reservations/host" -Headers $janeHeaders
@@ -235,10 +236,10 @@ Use the listing `_id` from GET (e.g. Family Home in Centurion). Replace `LISTING
 ### Day 9 — image upload (optional brief feature)
 
 1. Window 1: `npm start` (in `backend`)
-2. Window 2 — login as Jane, upload a photo from your PC:
+2. Window 2 — login as Lerato, upload a photo from your PC:
 
    ```powershell
-   $login = @{ email = "jane@example.com"; password = "password321" } | ConvertTo-Json
+   $login = @{ email = "lerato@example.com"; password = "password321" } | ConvertTo-Json
    $auth = Invoke-RestMethod -Method Post -Uri "http://localhost:5000/api/users/login" -Body $login -ContentType "application/json"
    $headers = @{ Authorization = "Bearer $($auth.token)" }
 
@@ -269,7 +270,7 @@ Use the listing `_id` from GET (e.g. Family Home in Centurion). Replace `LISTING
    ```
    Second window: `npm run test:api` → all **PASS**.
 
-**Backend phase done.** Next: **Day 11** — create the React `client/` app (public Centurion site).
+**Backend phase done.** Next: **Day 11** — create the React `client/` app (public Cape Town site).
 
 ### Day 11 — React client setup + Home hero
 
@@ -295,8 +296,8 @@ Open [http://localhost:5173](http://localhost:5173)
 
 **Success:**
 
-- Centurion hero banner with “Explore Centurion stays” button
-- Green line: “Connected to API — X Centurion listings available”
+- Cape Town hero banner with “Explore Cape Town stays” button
+- Green line: “Connected to API — X Cape Town listings available”
 
 If you see a red API error, start the backend first (Terminal 1).
 
@@ -305,7 +306,7 @@ If you see a red API error, start the backend first (Terminal 1).
 Scroll below the hero on [http://localhost:5173](http://localhost:5173):
 
 - Section title: **Inspiration for your next trip**
-- Grid of Centurion listings from `GET /api/accommodations?location=Centurion`
+- Grid of Cape Town listings from `GET /api/accommodations?location=Cape Town`
 - Each card: image, title, type, price (R/night), link to `/listings/:id`
 
 **Success:** You see your seeded apartment, family home, and townhouse (if in DB).
@@ -326,22 +327,22 @@ Open any listing details page. Backend must be running.
 
 1. Pick **check-in** / **check-out** — total updates automatically
 2. Choose **guests**
-3. Log in as John: `john@example.com` / `password123`
+3. Log in as Jannie: `jannie@example.com` / `password123`
 4. Click **Reserve** — saves to MongoDB via `POST /api/reservations`
 
 **Success:** green message “Reservation confirmed! Saved to MongoDB.”
 
-Verify: log in as Jane in API or check Atlas `reservations` collection.
+Verify: log in as Lerato in API or check Atlas `reservations` collection.
 
 ### Day 18 — header login + reservations table
 
 1. **Logged out:** header shows **Become a host** → links to `/login`
 2. Click **profile icon** (☰) → **Log in** or browse
-3. Log in as John: `john@example.com` / password123
-4. Header shows **Hi, John** + avatar → dropdown: **View reservations**, **Log out**
+3. Log in as Jannie: `jannie@example.com` / password123
+4. Header shows **Hi, Jannie** + avatar → dropdown: **View reservations**, **Log out**
 5. `/reservations` shows a **table** of your bookings
 
-**Host test:** log in as `jane@example.com` / password321 → table shows guest bookings on her listings.
+**Host test:** log in as `lerato@example.com` / password321 → table shows guest bookings on her listings.
 
 ### Day 19 — client polish + rubric pass
 
@@ -364,15 +365,15 @@ Scroll to the bottom of [http://localhost:5173](http://localhost:5173):
 
 ### Day 15 — Location page
 
-Open [http://localhost:5173/locations?location=Centurion](http://localhost:5173/locations?location=Centurion)
+Open [http://localhost:5173/locations?location=Cape Town](http://localhost:5173/locations?location=Cape Town)
 
-Or click **Explore Centurion stays** on the hero, or search from the header.
+Or click **Explore Cape Town stays** on the hero, or search from the header.
 
 **Success:**
 
-- Heading: `X accommodations in Centurion`
+- Heading: `X accommodations in Cape Town`
 - Each row: image **left**, details **right** (type, title, amenities, rating, reviews, R/night)
-- Change filter to search another location (e.g. Centurion only for now in your data)
+- Change filter to search another location (e.g. Cape Town only for now in your data)
 - Click a row → listing details placeholder
 
 ### Day 16 — listing details (gallery + static sections)
@@ -383,7 +384,7 @@ Click any listing from Home or Location page, or open an id directly:
 
 **Success:**
 
-- Heading: `{type} in Centurion`, subheading (title), ★ rating + reviews + location
+- Heading: `{type} in Cape Town`, subheading (title), ★ rating + reviews + location
 - Gallery: large image left, 4 smaller images (2×2) on the right
 - Left column: about, sleep, amenities, 7 nights, reviews, host, policies
 - Right column: price card (full calculator on Day 17)
@@ -400,13 +401,13 @@ npm run dev
 
 Open http://localhost:5174
 
-- [x] Host login (jane@example.com / password321)
+- [x] Host login (lerato@example.com / password321)
 - [x] Protected dashboard — redirects to login when logged out
 - [x] Header: logged out vs logged in states
 
 ### Day 21 — admin listing CRUD
 
-Log in as Jane on http://localhost:5174
+Log in as Lerato on http://localhost:5174
 
 - [x] `/listings` — table of your listings
 - [x] Create, edit, delete listings
@@ -416,7 +417,7 @@ Verify on public client: new listing appears on Home or Location page.
 
 ### Day 22 — admin host reservations
 
-- [x] `/reservations` — bookings on Jane’s listings
+- [x] `/reservations` — bookings on Lerato’s listings
 - [x] Guest name, dates, nights, total
 - [x] Cancel booking (optional)
 
@@ -434,6 +435,6 @@ Verify on public client: new listing appears on Home or Location page.
 1. Read [SUBMISSION.md](./SUBMISSION.md) — marker setup, demo flow, pre-submission checklist
 2. Confirm GitHub repo is public/up to date
 3. Replace placeholder `JWT_SECRET` in `backend/.env`
-4. Prepare what to submit to your course (repo URL + Centurion demo note)
+4. Prepare what to submit to your course (repo URL + Cape Town demo note)
 
-**Next: Day 25** — final rubric gap review and buffer before due date (27 June 2026).
+**Next: Day 25** — final rubric gap review and buffer before due date (1 July 2026).

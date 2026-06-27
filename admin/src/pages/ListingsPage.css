@@ -1,3 +1,18 @@
+.listings-page__heading {
+  text-align: center;
+  margin-bottom: 1.75rem;
+}
+
+.listings-page__heading h1 {
+  margin: 0;
+  font-size: clamp(1.5rem, 3vw, 1.85rem);
+  font-weight: 600;
+}
+
+.listings-page__status {
+  text-align: center;
+}
+
 .listings-page__empty {
   background: #fafafa;
   border: 1px dashed #ddd;
@@ -10,69 +25,152 @@
   align-items: center;
 }
 
-.listings-page__table-wrap {
-  overflow-x: auto;
-  border: 1px solid #ebebeb;
-  border-radius: 16px;
+.listings-page__list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
 }
 
-.listings-page__table {
-  width: 100%;
-  border-collapse: collapse;
-  min-width: 760px;
+.listings-page__card {
+  display: grid;
+  grid-template-columns: clamp(220px, 22vw, 280px) 1fr;
+  gap: 1.5rem;
+  padding: 1.25rem 1.5rem;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  background: #fff;
 }
 
-.listings-page__table th,
-.listings-page__table td {
-  padding: 14px 16px;
-  text-align: left;
-  border-bottom: 1px solid #ebebeb;
+.listings-page__media {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
 }
 
-.listings-page__table th {
-  background: #fafafa;
-  font-size: 0.85rem;
-  color: #717171;
-}
-
-.listings-page__table tr:last-child td {
-  border-bottom: 0;
-}
-
-.listings-page__thumb {
-  width: 64px;
-  height: 48px;
-  object-fit: cover;
-  border-radius: 8px;
+.listings-page__image {
+  border-radius: 12px;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
   background: #f0f0f0;
 }
 
-.listings-page__actions {
+.listings-page__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.listings-page__update,
+.listings-page__delete {
+  display: block;
+  width: 100%;
+  border: 0;
+  border-radius: 8px;
+  padding: 0.7rem 1rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.listings-page__update {
+  background: #0071c2;
+  color: #fff;
+}
+
+.listings-page__update:hover {
+  background: #005999;
+}
+
+.listings-page__delete {
+  background: #ff385c;
+  color: #fff;
+}
+
+.listings-page__delete:hover:not(:disabled) {
+  background: #e31c5f;
+}
+
+.listings-page__delete:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.listings-page__details {
   display: flex;
-  gap: 12px;
+  flex-direction: column;
+  min-width: 0;
+  padding: 0.15rem 0;
+}
+
+.listings-page__meta {
+  margin: 0 0 0.35rem;
+  color: #717171;
+  font-size: 0.95rem;
+}
+
+.listings-page__title {
+  margin: 0 0 0.65rem;
+  font-size: clamp(1.2rem, 2vw, 1.55rem);
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.listings-page__specs,
+.listings-page__amenities {
+  margin: 0 0 0.5rem;
+  color: #717171;
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+
+.listings-page__amenities {
+  margin-bottom: auto;
+}
+
+.listings-page__footer {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1rem;
+  padding-top: 0.75rem;
+}
+
+.listings-page__rating {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.listings-page__reviews {
+  font-weight: 400;
+  color: #717171;
+}
+
+.listings-page__rating--new {
+  color: #008a05;
+  font-weight: 500;
+}
+
+.listings-page__price {
+  margin: 0;
+  font-size: 1.05rem;
   white-space: nowrap;
 }
 
-.listings-page__actions a {
-  color: #222;
-  font-weight: 600;
-  text-decoration: none;
+.listings-page__price strong {
+  font-weight: 700;
 }
 
-.listings-page__actions a:hover {
-  color: #ff385c;
-}
+@media (max-width: 768px) {
+  .listings-page__card {
+    grid-template-columns: 1fr;
+  }
 
-.listings-page__actions button {
-  border: 0;
-  background: none;
-  color: #c13515;
-  font-weight: 600;
-  cursor: pointer;
-  padding: 0;
-}
-
-.listings-page__actions button:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
+  .listings-page__footer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }

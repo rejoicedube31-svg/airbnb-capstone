@@ -1,7 +1,9 @@
 .admin-page {
-  max-width: 1200px;
+  width: 100%;
+  max-width: var(--admin-content-max, min(1600px, 96vw));
   margin: 0 auto;
-  padding: 40px 24px 64px;
+  padding: 1.5rem var(--admin-gutter, 1.25rem) 4rem;
+  box-sizing: border-box;
 }
 
 .admin-page__header {

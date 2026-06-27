@@ -1,0 +1,36 @@
+.admin-subnav {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  width: 100%;
+  max-width: var(--admin-content-max, min(1600px, 96vw));
+  margin: 0 auto;
+  padding: 1.25rem var(--admin-gutter, 1.25rem) 0.5rem;
+  box-sizing: border-box;
+}
+
+.admin-subnav a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.65rem 1.35rem;
+  border: 1px solid #222;
+  border-radius: 999px;
+  color: #222;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  background: #fff;
+  white-space: nowrap;
+}
+
+.admin-subnav a:hover {
+  background: #f7f7f7;
+}
+
+.admin-subnav a.active {
+  background: #222;
+  color: #fff;
+  border-color: #222;
+}

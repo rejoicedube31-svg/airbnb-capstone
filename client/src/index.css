@@ -4,6 +4,17 @@
   line-height: 1.5;
   color: #222;
   background: #fff;
+  /* Side bands — modest gutters, wider content */
+  --home-gutter: clamp(1rem, 2.5vw, 2rem);
+  --home-four-col-gap: clamp(1rem, 2vw, 1.5rem);
+  --home-content-max: none;
+  --brand-red: #ff385c;
+  --location-content-max: min(1500px, 96vw);
+  --location-gutter: clamp(1rem, 2vw, 1.75rem);
+  --details-content-max: min(1500px, 96vw);
+  --details-gutter: clamp(1rem, 2vw, 1.75rem);
+  --reservations-content-max: none;
+  --reservations-gutter: clamp(1rem, 2vw, 1.75rem);
 }
 
 *,
@@ -30,6 +41,26 @@ img {
   height: auto;
 }
 
+/* Shared 4-column grid — future getaways + footer alignment */
+.home-four-col {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--home-four-col-gap);
+  width: 100%;
+}
+
+@media (max-width: 900px) {
+  .home-four-col {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 500px) {
+  .home-four-col {
+    grid-template-columns: 1fr;
+  }
+}
+
 button:focus-visible,
 a:focus-visible,
 input:focus-visible,
@@ -39,8 +70,8 @@ select:focus-visible {
 }
 
 @media (max-width: 768px) {
-  .header {
-    padding: 0.75rem 1rem;
+  .header__inner {
+    padding: 0.75rem var(--home-gutter, 1rem);
   }
 
   .hero {
@@ -52,15 +83,20 @@ select:focus-visible {
   .discover,
   .things,
   .shop,
+  .host-questions,
   .getaways {
-    padding-left: 1rem;
-    padding-right: 1rem;
+    padding-left: var(--home-gutter, 1rem);
+    padding-right: var(--home-gutter, 1rem);
   }
 
   .location-page__main,
-  .listing-details__main,
   .reservations-page__main {
-    padding-left: 1rem;
-    padding-right: 1rem;
+    padding-left: var(--reservations-gutter, var(--location-gutter, var(--home-gutter, 1rem)));
+    padding-right: var(--reservations-gutter, var(--location-gutter, var(--home-gutter, 1rem)));
+  }
+
+  .listing-details__main {
+    padding-left: var(--details-gutter, var(--home-gutter, 1rem));
+    padding-right: var(--details-gutter, var(--home-gutter, 1rem));
   }
 }

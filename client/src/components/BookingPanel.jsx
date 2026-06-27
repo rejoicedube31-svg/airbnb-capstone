@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import {
   apiPost,
   calculateBookingTotal,
@@ -22,17 +22,32 @@ function defaultCheckOut() {
   return d.toISOString().slice(0, 10);
 }
 
+function formatPanelDate(value) {
+  if (!value) return "Add date";
+  const d = new Date(`${value}T12:00:00`);
+  return d.toLocaleDateString("en-US", {
+    month: "2-digit",
+    day: "2-digit",
+    year: "numeric",
+  });
+}
+
 /**
- * Cost calculator + Reserve — saves booking to MongoDB via JWT.
- * Why: Brief requires dynamic price breakdown and reservation on Location Details.
+ * Cost calculator + Reserve — video-aligned booking card.
  */
 export default function BookingPanel({ listing }) {
+  const [searchParams] = useSearchParams();
   const { user, isLoggedIn, setAuth, logout } = useAuth();
-  const [checkIn, setCheckIn] = useState(defaultCheckIn);
-  const [checkOut, setCheckOut] = useState(defaultCheckOut);
-  const [guests, setGuests] = useState(1);
+  const [checkIn, setCheckIn] = useState(() => searchParams.get("checkIn") || defaultCheckIn());
+  const [checkOut, setCheckOut] = useState(() => searchParams.get("checkOut") || defaultCheckOut());
+  const [guests, setGuests] = useState(() => {
+    const fromUrl = Number(searchParams.get("guests"));
+    if (fromUrl >= 1 && fromUrl <= listing.guests) return fromUrl;
+    if (fromUrl >= 1) return Math.min(fromUrl, listing.guests);
+    return 1;
+  });
   const [showLogin, setShowLogin] = useState(!isLoggedIn);
-  const [email, setEmail] = useState("john@example.com");
+  const [email, setEmail] = useState("jannie@example.com");
   const [password, setPassword] = useState("password123");
   const [status, setStatus] = useState("");
   const [error, setError] = useState("");
@@ -44,12 +59,21 @@ export default function BookingPanel({ listing }) {
 
   const nights = useMemo(() => {
     if (!checkIn || !checkOut) return 0;
-    return calculateNights(checkIn, checkOut);
+    const n = calculateNights(checkIn, checkOut);
+    return n > 0 ? n : 0;
   }, [checkIn, checkOut]);
 
   const costs = useMemo(() => {
-    if (nights < 1) return { subtotal: 0, total: 0 };
-    return calculateBookingTotal(listing, nights);
+    const effectiveNights = nights > 0 ? nights : 0;
+    const { subtotal, total } = calculateBookingTotal(listing, effectiveNights);
+    if (effectiveNights === 0) {
+      const feesOnly =
+        (listing.cleaningFee || 0) +
+        (listing.serviceFee || 0) +
+        (listing.occupancyTaxes || 0);
+      return { subtotal: 0, total: feesOnly };
+    }
+    return { subtotal, total };
   }, [listing, nights]);
 
   async function handleLogin(event) {
@@ -106,7 +130,7 @@ export default function BookingPanel({ listing }) {
         },
         true
       );
-      setStatus("Reservation confirmed! Saved to MongoDB.");
+      window.alert("Reservation successful!");
     } catch (err) {
       setError(err.message);
     } finally {
@@ -117,80 +141,91 @@ export default function BookingPanel({ listing }) {
   return (
     <aside className="booking-panel">
       <div className="booking-panel__card">
-        <p className="booking-panel__price">
-          <strong>R{listing.price}</strong> <span>night</span>
-        </p>
+        <div className="booking-panel__header">
+          <p className="booking-panel__price">
+            <strong>R{listing.price}</strong> <span>/ night</span>
+          </p>
+          {listing.rating > 0 && (
+            <p className="booking-panel__rating">
+              ★ {listing.rating} <span>({listing.reviews})</span>
+            </p>
+          )}
+        </div>
 
-        <div className="booking-panel__dates">
-          <label>
-            Check-in
-            <input
-              type="date"
-              value={checkIn}
-              onChange={(e) => setCheckIn(e.target.value)}
-            />
-          </label>
-          <label>
-            Check-out
-            <input
-              type="date"
-              value={checkOut}
-              onChange={(e) => setCheckOut(e.target.value)}
-            />
+        <div className="booking-panel__fields">
+          <div className="booking-panel__dates">
+            <label>
+              <span>Check-in</span>
+              <input
+                type="date"
+                value={checkIn}
+                onChange={(e) => setCheckIn(e.target.value)}
+              />
+              <em>{formatPanelDate(checkIn)}</em>
+            </label>
+            <label>
+              <span>Check-out</span>
+              <input
+                type="date"
+                value={checkOut}
+                onChange={(e) => setCheckOut(e.target.value)}
+              />
+              <em>{formatPanelDate(checkOut)}</em>
+            </label>
+          </div>
+          <label className="booking-panel__guests">
+            <span>Guests</span>
+            <em>
+              {guests} guest{guests === 1 ? "" : "s"}
+            </em>
+            <select value={guests} onChange={(e) => setGuests(Number(e.target.value))}>
+              {Array.from({ length: listing.guests }, (_, i) => i + 1).map((n) => (
+                <option key={n} value={n}>
+                  {n} guest{n === 1 ? "" : "s"}
+                </option>
+              ))}
+            </select>
           </label>
         </div>
 
-        <label className="booking-panel__guests">
-          Guests
-          <select value={guests} onChange={(e) => setGuests(Number(e.target.value))}>
-            {Array.from({ length: listing.guests }, (_, i) => i + 1).map((n) => (
-              <option key={n} value={n}>
-                {n} guest{n === 1 ? "" : "s"}
-              </option>
-            ))}
-          </select>
-        </label>
+        <button
+          type="button"
+          className="booking-panel__btn"
+          onClick={handleReserve}
+          disabled={submitting}
+        >
+          {submitting ? "Reserving…" : "Reserve"}
+        </button>
+        <p className="booking-panel__charge-note">You won&apos;t be charged yet</p>
 
-        {nights >= 1 ? (
-          <div className="booking-panel__breakdown">
-            <div className="booking-panel__line">
-              <span>
-                R{listing.price} × {nights} night{nights === 1 ? "" : "s"}
-              </span>
-              <span>R{costs.subtotal}</span>
-            </div>
-            {listing.weeklyDiscount > 0 && (
-              <div className="booking-panel__line booking-panel__line--discount">
-                <span>Weekly discount</span>
-                <span>−R{listing.weeklyDiscount}</span>
-              </div>
-            )}
-            {listing.cleaningFee > 0 && (
-              <div className="booking-panel__line">
-                <span>Cleaning fee</span>
-                <span>R{listing.cleaningFee}</span>
-              </div>
-            )}
-            {listing.serviceFee > 0 && (
-              <div className="booking-panel__line">
-                <span>Service fee</span>
-                <span>R{listing.serviceFee}</span>
-              </div>
-            )}
-            {listing.occupancyTaxes > 0 && (
-              <div className="booking-panel__line">
-                <span>Occupancy taxes and fees</span>
-                <span>R{listing.occupancyTaxes}</span>
-              </div>
-            )}
-            <div className="booking-panel__line booking-panel__total">
-              <span>Total</span>
-              <span>R{costs.total}</span>
-            </div>
+        <div className="booking-panel__breakdown">
+          <div className="booking-panel__line">
+            <span>
+              R{listing.price} × {nights} night{nights === 1 ? "" : "s"}
+            </span>
+            <span>R{costs.subtotal}</span>
           </div>
-        ) : (
-          <p className="booking-panel__invalid">Choose valid check-in and check-out dates.</p>
-        )}
+          <div className="booking-panel__line booking-panel__line--discount">
+            <span>Weekly discount</span>
+            <span>−R{listing.weeklyDiscount || 0}</span>
+          </div>
+          <div className="booking-panel__line">
+            <span>Cleaning fee</span>
+            <span>R{listing.cleaningFee || 0}</span>
+          </div>
+          <div className="booking-panel__line">
+            <span>Service fee</span>
+            <span>R{listing.serviceFee || 0}</span>
+          </div>
+          <div className="booking-panel__line">
+            <span>Occupancy taxes and fees</span>
+            <span>R{listing.occupancyTaxes || 0}</span>
+          </div>
+          <div className="booking-panel__line booking-panel__total">
+            <span>Total</span>
+            <span>R{costs.total}</span>
+          </div>
+        </div>
 
         {user && !showLogin && (
           <p className="booking-panel__user">
@@ -229,21 +264,12 @@ export default function BookingPanel({ listing }) {
             <button type="submit" className="booking-panel__login-btn">
               Log in
             </button>
-            <p className="booking-panel__hint">Demo: john@example.com / password123</p>
+            <p className="booking-panel__hint">Demo: jannie@example.com / password123</p>
           </form>
         )}
 
         {error && <p className="booking-panel__error">{error}</p>}
         {status && <p className="booking-panel__success">{status}</p>}
-
-        <button
-          type="button"
-          className="booking-panel__btn"
-          onClick={handleReserve}
-          disabled={submitting || nights < 1}
-        >
-          {submitting ? "Reserving…" : "Reserve"}
-        </button>
       </div>
     </aside>
   );

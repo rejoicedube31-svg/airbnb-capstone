@@ -1,33 +1,114 @@
 .inspiration {
-  padding: 2.5rem 2rem 3rem;
+  width: 100%;
+  padding: 2.5rem var(--home-gutter, 2rem) 3rem;
+  box-sizing: border-box;
 }
 
-.inspiration__header {
-  margin-bottom: 1.75rem;
+.inspiration__title {
+  margin: 0 0 1.5rem;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #222;
 }
 
-.inspiration__header h2 {
-  margin: 0 0 0.5rem;
-  font-size: 1.6rem;
+.inspiration__row {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+  scroll-snap-type: x proximity;
+  -webkit-overflow-scrolling: touch;
 }
 
-.inspiration__header p {
-  margin: 0;
-  color: #717171;
+.inspiration__row::-webkit-scrollbar {
+  height: 6px;
 }
 
-.inspiration__grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 1.5rem;
+.inspiration__row::-webkit-scrollbar-thumb {
+  background: #ddd;
+  border-radius: 999px;
 }
 
-.inspiration__message {
-  color: #717171;
-  margin: 0;
+.inspiration-card {
+  flex: 0 0 200px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 12px;
+  overflow: hidden;
+  text-decoration: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  scroll-snap-align: start;
 }
 
-.inspiration__error {
-  color: #c13515;
-  margin: 0;
+.inspiration-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.inspiration-card__image {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: #f0f0f0;
+}
+
+.inspiration-card__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.inspiration-card__label {
+  background: #ff385c;
+  color: #fff;
+  padding: 0.85rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-height: 72px;
+  justify-content: center;
+}
+
+.inspiration-card__city {
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.inspiration-card__country {
+  font-size: 0.85rem;
+  font-weight: 400;
+  opacity: 0.95;
+  line-height: 1.2;
+}
+
+@media (min-width: 768px) {
+  .inspiration__row {
+    overflow-x: visible;
+  }
+
+  .inspiration-card {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .inspiration {
+    padding: 2rem var(--home-gutter, 1rem) 2.5rem;
+  }
+
+  .inspiration-card {
+    flex: 0 0 168px;
+  }
+
+  .inspiration-card__label {
+    min-height: 64px;
+    padding: 0.75rem 0.85rem;
+  }
+
+  .inspiration-card__city {
+    font-size: 0.95rem;
+  }
 }

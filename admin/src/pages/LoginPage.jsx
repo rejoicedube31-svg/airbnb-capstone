@@ -8,7 +8,7 @@ export default function LoginPage() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const [email, setEmail] = useState("jane@example.com");
+  const [email, setEmail] = useState("lerato@example.com");
   const [password, setPassword] = useState("password321");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -36,7 +36,7 @@ export default function LoginPage() {
       <main className="login-page__main">
         <form className="login-page__card" onSubmit={handleSubmit}>
           <h1>Host login</h1>
-          <p className="login-page__subtitle">Sign in to manage your Centurion listings and reservations.</p>
+          <p className="login-page__subtitle">Sign in to manage your listings and reservations.</p>
 
           <label>
             Email
@@ -68,7 +68,7 @@ export default function LoginPage() {
           </button>
 
           <p className="login-page__demo">
-            Demo host: <strong>jane@example.com</strong> / password321
+            Demo host: <strong>lerato@example.com</strong> / password321
           </p>
 
           <Link to="/" className="login-page__back">

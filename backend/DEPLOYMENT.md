@@ -17,7 +17,7 @@ npm start
 |--------|---------|
 | `npm start` | Run API |
 | `npm run dev` | Auto-restart on file changes |
-| `npm run seed` | Sample Centurion data + users |
+| `npm run seed` | Sample Cape Town data + users |
 | `npm run test:api` | Test all endpoints (server must be running) |
 
 ## Environment variables
@@ -94,10 +94,10 @@ http://localhost:5000/uploads/filename.jpg
 
 Manual spot-check:
 
-- [ ] Login Jane → token returned
-- [ ] GET accommodations → Centurion listings
+- [ ] Login Lerato → token returned
+- [ ] GET accommodations → Cape Town listings
 - [ ] Upload image → URL opens in browser
-- [ ] John creates reservation → Jane sees on `/api/reservations/host`
+- [ ] Jannie creates reservation → Lerato sees on `/api/reservations/host`
 
 ## Project structure (matches brief)
 
@@ -134,5 +134,5 @@ Also include:
 - GitHub repo URL
 - How to run backend (`npm install`, `.env`, `npm run seed`, `npm start`)
 - Seed login emails (john / jane)
-- Demo location: Centurion
+- Demo location: Cape Town
 - API docs: `backend/API.md`

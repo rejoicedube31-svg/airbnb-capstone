@@ -1,53 +1,104 @@
 .shop {
-  padding: 2.5rem 2rem 3rem;
+  width: 100%;
+  padding: 2.5rem var(--home-gutter, 2rem) 3.5rem;
+  box-sizing: border-box;
 }
 
 .shop__inner {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
+  grid-template-columns: 1fr minmax(300px, 420px);
+  gap: clamp(1.5rem, 4vw, 3rem);
   align-items: center;
-  background: #f7f7f7;
-  border-radius: 16px;
-  padding: 2rem;
+  width: 100%;
 }
 
-.shop__text h2 {
-  margin: 0 0 0.75rem;
-  font-size: 1.6rem;
-}
-
-.shop__text p {
+.shop__title {
   margin: 0 0 1.25rem;
-  color: #484848;
-  line-height: 1.5;
-  max-width: 400px;
+  font-size: 1.65rem;
+  font-weight: 700;
+  color: #222;
+  line-height: 1.2;
 }
 
-.shop__text button {
+.shop__cta {
   border: none;
   background: #222;
   color: #fff;
+  font-size: 0.95rem;
   font-weight: 600;
-  padding: 0.75rem 1.25rem;
-  border-radius: 8px;
+  padding: 0.7rem 1.15rem;
+  border-radius: 999px;
   cursor: pointer;
 }
 
-.shop__text button:hover {
+.shop__cta:hover {
   background: #000;
 }
 
-.shop__image img {
+.shop__cards {
+  position: relative;
   width: 100%;
+  min-width: 300px;
+  height: 210px;
+  margin-left: auto;
+}
+
+.shop__card {
+  position: absolute;
+  width: 175px;
+  height: auto;
   border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
   display: block;
-  object-fit: cover;
-  max-height: 280px;
+}
+
+.shop__card--villa {
+  left: 0;
+  top: 28px;
+  transform: rotate(-10deg);
+  z-index: 1;
+}
+
+.shop__card--pink {
+  left: 88px;
+  top: 10px;
+  transform: rotate(2deg);
+  z-index: 2;
+}
+
+.shop__card--sunset {
+  left: 168px;
+  top: 24px;
+  transform: rotate(12deg);
+  z-index: 3;
 }
 
 @media (max-width: 768px) {
+  .shop {
+    padding: 2rem var(--home-gutter, 1rem) 3rem;
+  }
+
   .shop__inner {
     grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .shop__cards {
+    min-width: 0;
+    max-width: 320px;
+    height: 190px;
+    margin: 0 auto;
+  }
+
+  .shop__card {
+    width: 150px;
+  }
+
+  .shop__card--pink {
+    left: 72px;
+  }
+
+  .shop__card--sunset {
+    left: 138px;
   }
 }

@@ -1,7 +1,8 @@
 # Submission guide — Airbnb Capstone
 
-**Due:** 27 June 2026  
-**Demo location:** Centurion, Gauteng, South Africa  
+**Due:** 1 July 2026  
+**Demo locations:** Cape Town (primary), New York, Paris, Tokyo, Phuket  
+**Demo users:** Jannie (guest), Lerato (host)  
 **GitHub:** https://github.com/rejoicedube31-svg/airbnb-capstone
 
 ---
@@ -13,7 +14,7 @@ A full-stack Airbnb-style web application with three parts:
 | Part | Folder | URL (local) | Purpose |
 |------|--------|-------------|---------|
 | API | `backend/` | http://localhost:5000 | Node.js, Express, MongoDB, JWT |
-| Public site | `client/` | http://localhost:5173 | Browse Centurion listings, book stays |
+| Public site | `client/` | http://localhost:5173 | Browse listings, book stays |
 | Admin dashboard | `admin/` | http://localhost:5174 | Host login, manage listings & reservations |
 
 ---
@@ -50,6 +51,7 @@ npm start
 cd ..\client
 copy .env.example .env
 npm install
+npm run setup:images
 npm run dev
 ```
 
@@ -79,8 +81,8 @@ All tests should show **PASS**.
 
 | Role | Email | Password | Use on |
 |------|-------|----------|--------|
-| Guest | john@example.com | password123 | Client (5173) — book stays |
-| Host | jane@example.com | password321 | Admin (5174) — manage listings |
+| Guest | jannie@example.com | password123 | Client (5173) — book stays |
+| Host | lerato@example.com | password321 | Admin (5174) — manage listings |
 
 ---
 
@@ -89,17 +91,17 @@ All tests should show **PASS**.
 ### Guest journey (public client)
 
 1. Open http://localhost:5173
-2. Browse Home → inspiration cards for Centurion
-3. Go to **Locations** or search Centurion
-4. Open a listing → set dates → log in as John → **Reserve**
-5. Header → **View reservations** → see booking table
+2. Browse Home → inspiration cards from API
+3. Go to **Locations** or search **Cape Town** (or **All Locations** for all six stays)
+4. Open a listing → set dates → log in as **Jannie** → **Reserve**
+5. Confirm **Reservation successful!** alert → **View reservations** → see booking table
 
 ### Host journey (admin)
 
 1. Open http://localhost:5174
-2. Log in as Jane
-3. **Listings** → view, create, edit, or delete a listing; upload a photo
-4. **Reservations** → see John’s booking (guest, dates, total)
+2. Log in as **Lerato**
+3. **View Listings** → card layout with Update / Delete; **Create Listing** → two-column form
+4. **View Reservations** → see Jannie’s booking (guest, property, dates, Delete)
 5. Refresh client — listing changes appear on the public site
 
 ---
@@ -127,7 +129,7 @@ Before you submit to your course portal:
 - [ ] Strong `JWT_SECRET` in `backend/.env` (not the placeholder)
 - [ ] No `.env` files committed to git
 - [ ] Mobile test at 375px on client and admin
-- [ ] Submit **GitHub URL** + brief note: demo location is Centurion
+- [ ] Submit **GitHub URL** + brief note: demo users Jannie/Lerato, six cities in seed data
 
 ---
 
@@ -144,4 +146,4 @@ Before you submit to your course portal:
 
 See [backend/DEPLOYMENT.md](./backend/DEPLOYMENT.md) for Render/Railway notes. Local demo is sufficient for capstone marking if all three apps run as above.
 
-**Next:** Day 25 — final rubric gap review and buffer before due date.
+**Next:** Record demo video, push to GitHub, submit before **1 July 2026**.

@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate, useLocation } from "react-router-dom";
-import PageLayout from "../components/PageLayout";
+import { useNavigate, useLocation } from "react-router-dom";
 import { loginUser } from "../api/client";
 import { useAuth } from "../context/AuthContext";
 import "./LoginPage.css";
@@ -10,7 +9,7 @@ export default function LoginPage() {
   const location = useLocation();
   const { setAuth } = useAuth();
 
-  const [email, setEmail] = useState("john@example.com");
+  const [email, setEmail] = useState("jannie@example.com");
   const [password, setPassword] = useState("password123");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -34,25 +33,24 @@ export default function LoginPage() {
   }
 
   return (
-    <PageLayout>
+    <div className="login-page">
       <main className="login-page__main">
-        <form className="login-page__card" onSubmit={handleSubmit}>
-          <h1>Log in</h1>
-          <p className="login-page__subtitle">Book stays and view your reservations in Centurion.</p>
+        <form className="login-page__form" onSubmit={handleSubmit}>
+          <h1 className="login-page__title">Login</h1>
 
-          <label>
-            Email
+          <label className="login-page__field">
+            <span className="login-page__label">Username</span>
             <input
-              type="email"
+              type="text"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              autoComplete="email"
+              autoComplete="username"
             />
           </label>
 
-          <label>
-            Password
+          <label className="login-page__field">
+            <span className="login-page__label">Password</span>
             <input
               type="password"
               value={password}
@@ -62,23 +60,21 @@ export default function LoginPage() {
             />
           </label>
 
-          {error && <p className="login-page__error">{error}</p>}
+          {error && (
+            <p className="login-page__error" role="alert">
+              {error}
+            </p>
+          )}
 
-          <button type="submit" className="login-page__submit" disabled={loading}>
-            {loading ? "Logging in…" : "Log in"}
+          <button type="button" className="login-page__forgot">
+            Forgot Password?
           </button>
 
-          <p className="login-page__demo">
-            Demo guests: <strong>john@example.com</strong> / password123
-            <br />
-            Demo host: <strong>jane@example.com</strong> / password321
-          </p>
-
-          <Link to="/" className="login-page__back">
-            ← Back to home
-          </Link>
+          <button type="submit" className="login-page__submit" disabled={loading}>
+            {loading ? "Logging in…" : "Login"}
+          </button>
         </form>
       </main>
-    </PageLayout>
+    </div>
   );
 }

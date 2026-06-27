@@ -1,11 +1,29 @@
 .location-page__main {
-  max-width: 960px;
+  width: 100%;
+  max-width: var(--location-content-max, 1500px);
   margin: 0 auto;
-  padding: 1.5rem 2rem 3rem;
+  padding: 1.5rem var(--location-gutter, 1.5rem) 3rem;
+  box-sizing: border-box;
+}
+
+.location-page__search-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 0 0 1rem;
+  color: #717171;
+  font-size: 0.95rem;
+}
+
+.location-page__search-summary span:not(:last-child)::after {
+  content: " · ";
+  margin-left: 12px;
+  color: #ddd;
 }
 
 .location-page__filter {
   margin-bottom: 1.5rem;
+  max-width: 720px;
 }
 
 .location-page__filter label {
@@ -71,4 +89,6 @@
 .location-page__list {
   display: flex;
   flex-direction: column;
+  gap: 1.25rem;
+  width: 100%;
 }

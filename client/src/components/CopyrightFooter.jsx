@@ -9,7 +9,7 @@ export default function CopyrightFooter() {
     <div className="copyright">
       <div className="copyright__inner">
         <p className="copyright__text">
-          © 2026 Airbnb Capstone Clone · Centurion demo · Not affiliated with Airbnb, Inc.
+          © 2026 Airbnb Capstone Clone · Cape Town demo · Not affiliated with Airbnb, Inc.
         </p>
         <div className="copyright__actions">
           <div className="copyright__social">

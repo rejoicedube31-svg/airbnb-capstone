@@ -1,11 +1,11 @@
 # Admin rubric checklist (host dashboard)
 
-Demo location: **Centurion, Gauteng, South Africa**
+Demo: **Cape Town** + international cities. Host: **Lerato** (`lerato@example.com`).
 
 Open the app: `cd admin && npm run dev` → http://localhost:5174  
 Backend must run: `cd backend && npm start`
 
-Log in as host: **jane@example.com** / password321
+Log in as host: **lerato@example.com** / password321
 
 ## Login and auth
 
@@ -16,10 +16,10 @@ Log in as host: **jane@example.com** / password321
 
 ## Header (all admin views)
 
-- [x] Logo + “Airbnb Admin” branding
+- [x] Logo + **airbnb** branding
 - [x] Logged out: **Become a host** → login page
-- [x] Logged in: greeting + profile dropdown (reservations, listings, log out)
-- [x] Nav links: Dashboard, Listings, Reservations
+- [x] Logged in: Welcome + profile dropdown
+- [x] Sub-nav pills: View Reservations, View Listings, Create Listing
 
 ## Dashboard
 
@@ -29,17 +29,17 @@ Log in as host: **jane@example.com** / password321
 
 ## Listings (CRUD)
 
-- [x] View table of host’s own listings
-- [x] Create new listing form (`/listings/new`)
-- [x] Edit existing listing (`/listings/:id/edit`)
+- [x] View host listings in card layout (`/listings`, `/view-listings`)
+- [x] Create listing — two-column form (`/listings/new`)
+- [x] Update listing (`/listings/:id/edit`)
 - [x] Delete listing with confirmation
 - [x] Image upload — Multer → `/uploads/...` → saved on listing
 
 ## Reservations
 
-- [x] Host reservations table (`/reservations`)
-- [x] Shows listing, guest, dates, guests, nights, total
-- [x] Cancel booking (optional — backend supports host cancel)
+- [x] Host reservations table (`/reservations`, `/view-reservations`)
+- [x] Booked by, property name, dates, Delete action
+- [x] Delete booking (optional — backend supports host cancel)
 
 ## Code quality
 

@@ -1,12 +1,21 @@
 .reservations-page__main {
-  max-width: 1100px;
+  width: 100%;
+  max-width: var(--reservations-content-max, none);
   margin: 0 auto;
-  padding: 2rem;
+  padding: 2rem var(--reservations-gutter, 1.75rem);
+  box-sizing: border-box;
 }
 
 .reservations-page__header h1 {
   margin: 0 0 0.35rem;
   font-size: 1.75rem;
+  text-align: center;
+}
+
+.reservations-page__subtitle {
+  margin: 0 0 1.5rem;
+  color: #717171;
+  text-align: center;
 }
 
 .reservations-page__header p {
@@ -45,6 +54,11 @@
   border-bottom: 1px solid #ebebeb;
 }
 
+.reservations-table th:not(:first-child),
+.reservations-table td:not(:first-child) {
+  border-left: 1px solid #ebebeb;
+}
+
 .reservations-table th {
   background: #f7f7f7;
   font-weight: 600;
@@ -65,4 +79,37 @@
 
 .reservations-table a:hover {
   color: #ff385c;
+}
+
+.reservations-table__actions-head,
+.reservations-table__actions {
+  width: 1%;
+  white-space: nowrap;
+  text-align: left;
+  vertical-align: middle;
+  padding-right: 1rem;
+}
+
+.reservations-table__delete {
+  display: inline-block;
+  width: auto;
+  border: 0;
+  border-radius: 6px;
+  background: #ff385c;
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 0.55rem 2rem;
+  min-width: 6.5rem;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.reservations-table__delete:hover:not(:disabled) {
+  background: #e31c5f;
+}
+
+.reservations-table__delete:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
 }

@@ -1,6 +1,9 @@
 # Full-stack integration test (Day 23)
 
-Walk through this checklist before submission. **Demo location:** Centurion, Gauteng, South Africa.
+Walk through this checklist before submission.
+
+**Demo:** Cape Town (2 listings), plus New York, Paris, Tokyo, Phuket (1 each).  
+**Users:** Jannie (guest), Lerato (host).
 
 ## Prerequisites
 
@@ -21,8 +24,8 @@ npm run seed
 
 | Role | Email | Password |
 |------|-------|----------|
-| Guest | john@example.com | password123 |
-| Host | jane@example.com | password321 |
+| Guest | jannie@example.com | password123 |
+| Host | lerato@example.com | password321 |
 
 ---
 
@@ -45,32 +48,33 @@ npm run test:api
 ### Browse (no login)
 
 - [ ] Home loads — hero, inspiration cards, footer
-- [ ] Inspiration cards show Centurion listings from API
-- [ ] `/locations?location=Centurion` — listing rows with images and prices
+- [ ] Inspiration cards show listings from API
+- [ ] `/locations?location=Cape Town` — two listing rows with images and prices
+- [ ] `/locations?location=all` — six listings
 - [ ] Click a listing → details page with gallery and booking panel
 
-### Book as guest (John)
+### Book as guest (Jannie)
 
 1. Open a listing details page
 2. Set check-in / check-out — total updates
-3. Log in: john@example.com / password123
+3. Log in: jannie@example.com / password123
 4. Click **Reserve**
 
-- [ ] Success message appears
-- [ ] `/reservations` shows the new booking in the table
+- [ ] **Reservation successful!** alert appears
+- [ ] `/reservations` or `/view-reservations` shows the booking in the table
 
 ---
 
 ## 3. Admin → backend
 
-Log in to http://localhost:5174 as **jane@example.com** / password321
+Log in to http://localhost:5174 as **lerato@example.com** / password321
 
 ### Listings CRUD
 
-- [ ] `/listings` shows Jane’s listings only
-- [ ] **Add listing** — create a new Centurion property → appears in table
-- [ ] **Edit listing** — change price → save succeeds
-- [ ] **Upload photo** — image preview appears → save listing with image
+- [ ] **View Listings** (`/listings` or `/view-listings`) — Lerato’s six listings in card layout
+- [ ] **Create Listing** — two-column form; create a property → appears in list
+- [ ] **Update** on a card — edit price → save succeeds
+- [ ] **Upload Images** — preview appears → save listing with image
 - [ ] **Delete** a test listing (optional) — confirm dialog works
 
 ### Cross-check with public client
@@ -80,16 +84,16 @@ Log in to http://localhost:5174 as **jane@example.com** / password321
 
 ### Host reservations
 
-- [ ] `/reservations` shows bookings on Jane’s listings (including John’s)
-- [ ] Guest name, dates, nights, and total display correctly
-- [ ] **Cancel** works (optional — re-seed to restore sample data)
+- [ ] **View Reservations** shows bookings on Lerato’s listings (including Jannie’s)
+- [ ] Booked by, property name, dates, and Delete button display correctly
+- [ ] **Delete** works (optional — re-seed to restore sample data)
 
 ---
 
 ## 4. Auth isolation
 
-- [ ] Client login (John) and admin login (Jane) can be open in **separate tabs** without overwriting each other
-- [ ] Admin rejects non-host login (try john@example.com on admin login page)
+- [ ] Client login (Jannie) and admin login (Lerato) can be open in **separate tabs** without overwriting each other
+- [ ] Admin rejects non-host login (try jannie@example.com on admin login page)
 - [ ] Logging out in admin returns header to “Become a host” state
 
 ---
@@ -108,8 +112,8 @@ Use browser DevTools → responsive mode.
 **Admin**
 
 - [ ] Login form fits screen
-- [ ] Listings table scrolls horizontally
-- [ ] Reservations table scrolls horizontally
+- [ ] Listings cards stack on narrow screens
+- [ ] Reservations table scrolls horizontally if needed
 
 ---
 
@@ -132,9 +136,9 @@ Use browser DevTools → responsive mode.
 
 | Problem | Fix |
 |---------|-----|
-| API error on client/admin | Start backend first (`cd backend && npm start`) |
+| API error on client/admin | Start backend first (`cd backend; npm start`) |
 | Empty listings | Run `npm run seed` in `backend/` |
-| Images blank | Use uploaded `/uploads/...` paths or local placeholders |
+| Images blank | Run `npm run setup:images` in `client/`; check `/images/` paths |
 | `querySrv ECONNREFUSED` | Use `mongodb://` not `mongodb+srv://` in `.env` |
 | Admin on wrong port | Admin = 5174, client = 5173 |
 
@@ -145,9 +149,9 @@ Use browser DevTools → responsive mode.
 You are integration-ready when:
 
 1. `npm run test:api` — all pass  
-2. John can book on the client and see the reservation  
-3. Jane can manage listings and see/cancel reservations in admin  
+2. Jannie can book on the client and see the reservation  
+3. Lerato can manage listings and see/delete reservations in admin  
 4. Changes in admin appear on the public client  
 5. Mobile layouts are usable at 375px  
 
-Next: **Day 25** — final rubric gap review and buffer before due date.
+Next: push to GitHub, record demo video, submit before **1 July 2026**.

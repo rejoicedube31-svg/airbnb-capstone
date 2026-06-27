@@ -7,3 +7,9 @@
 .page-layout > main {
   flex: 1;
 }
+
+.page-layout--wide .header:not(.header--home) .header__inner {
+  max-width: none;
+  padding-left: var(--reservations-gutter, 1.75rem);
+  padding-right: var(--reservations-gutter, 1.75rem);
+}

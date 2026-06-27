@@ -1,3 +1,18 @@
+.reservations-page__heading {
+  text-align: center;
+  margin-bottom: 1.75rem;
+}
+
+.reservations-page__heading h1 {
+  margin: 0;
+  font-size: clamp(1.5rem, 3vw, 1.85rem);
+  font-weight: 600;
+}
+
+.reservations-page__status {
+  text-align: center;
+}
+
 .reservations-page__empty {
   background: #fafafa;
   border: 1px dashed #ddd;
@@ -13,25 +28,33 @@
 .reservations-page__table-wrap {
   overflow-x: auto;
   border: 1px solid #ebebeb;
-  border-radius: 16px;
+  border-radius: 12px;
 }
 
 .reservations-page__table {
   width: 100%;
   border-collapse: collapse;
-  min-width: 900px;
+  font-size: 0.9rem;
 }
 
 .reservations-page__table th,
 .reservations-page__table td {
-  padding: 14px 16px;
+  padding: 0.85rem 1rem;
   text-align: left;
   border-bottom: 1px solid #ebebeb;
 }
 
+.reservations-page__table th:not(:first-child),
+.reservations-page__table td:not(:first-child) {
+  border-left: 1px solid #ebebeb;
+}
+
 .reservations-page__table th {
-  background: #fafafa;
-  font-size: 0.85rem;
+  background: #f7f7f7;
+  font-weight: 600;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
   color: #717171;
 }
 
@@ -39,21 +62,35 @@
   background: #fafafa;
 }
 
-.reservations-page__table tr:last-child td {
-  border-bottom: 0;
+.reservations-page__actions-head,
+.reservations-page__actions {
+  width: 1%;
+  white-space: nowrap;
+  text-align: left;
+  vertical-align: middle;
+  padding-right: 1rem;
 }
 
-.reservations-page__actions button {
+.reservations-page__delete {
+  display: inline-block;
+  width: auto;
   border: 0;
-  background: none;
-  color: #c13515;
+  border-radius: 6px;
+  background: #ff385c;
+  color: #fff;
+  font-size: 0.9rem;
   font-weight: 600;
+  padding: 0.55rem 2rem;
+  min-width: 6.5rem;
   cursor: pointer;
-  padding: 0;
   white-space: nowrap;
 }
 
-.reservations-page__actions button:disabled {
-  opacity: 0.6;
+.reservations-page__delete:hover:not(:disabled) {
+  background: #e31c5f;
+}
+
+.reservations-page__delete:disabled {
+  opacity: 0.65;
   cursor: not-allowed;
 }

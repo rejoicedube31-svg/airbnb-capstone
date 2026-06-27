@@ -1,6 +1,6 @@
 # Frontend rubric checklist (public client)
 
-Demo location: **Centurion, Gauteng, South Africa**
+Demo: **Cape Town** (primary) + New York, Paris, Tokyo, Phuket. Users: **Jannie** / **Lerato**.
 
 Open the app: `cd client && npm run dev` → http://localhost:5173  
 Backend must run for API features: `cd backend && npm start`
@@ -19,7 +19,7 @@ Backend must run for API features: `cd backend && npm start`
 
 ## Location page
 
-- [x] Location filter (default Centurion)
+- [x] Location filter (default Cape Town)
 - [x] Heading with count + location name
 - [x] Cards: image left, details right (type, amenities, rating, reviews, price)
 
@@ -52,8 +52,8 @@ Backend must run for API features: `cd backend && npm start`
 ## Before submission
 
 - [ ] Run through all pages on mobile width (375px)
-- [ ] Test John login + reserve + view reservations
-- [ ] Test Jane host reservations table
+- [ ] Test Jannie login + reserve + view reservations
+- [ ] Test Lerato host flow in admin
 - [ ] Walk through `../INTEGRATION-TEST.md`
 - [ ] Commit and push `client/` changes
 

@@ -2,7 +2,7 @@
 
 Base URL: `http://localhost:5000`
 
-Demo location: **Centurion, South Africa**
+Demo locations: **Cape Town, New York, Paris, Tokyo, Phuket**
 
 ## Endpoints
 
@@ -11,7 +11,7 @@ Demo location: **Centurion, South Africa**
 | GET | `/api/health` | No | Server + DB status |
 | POST | `/api/users/login` | No | Returns JWT |
 | GET | `/api/users/me` | JWT | Current user from token |
-| GET | `/api/accommodations` | No | All listings (`?location=Centurion`) |
+| GET | `/api/accommodations` | No | All listings (`?location=Cape Town`) |
 | GET | `/api/accommodations/:id` | No | One listing |
 | POST | `/api/accommodations` | JWT host | Create listing |
 | PUT | `/api/accommodations/:id` | JWT host owner | Update listing |
@@ -26,8 +26,8 @@ Demo location: **Centurion, South Africa**
 
 | Email | Password | Role |
 |-------|----------|------|
-| john@example.com | password123 | user |
-| jane@example.com | password321 | host |
+| jannie@example.com | password123 | user |
+| lerato@example.com | password321 | host |
 
 ## Day 8 — full backend test
 

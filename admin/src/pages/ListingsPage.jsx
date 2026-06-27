@@ -1,10 +1,16 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import AdminHeader from "../components/AdminHeader";
+import AdminSubNav from "../components/AdminSubNav";
 import { deleteListing, fetchListings, imageUrl } from "../api/client";
 import { useAuth } from "../context/AuthContext";
 import "./AdminPage.css";
 import "./ListingsPage.css";
+
+function formatAmenities(list) {
+  if (!list?.length) return "None listed";
+  return list.slice(0, 3).join(", ");
+}
 
 export default function ListingsPage() {
   const { user } = useAuth();
@@ -52,22 +58,20 @@ export default function ListingsPage() {
   return (
     <div className="admin-app">
       <AdminHeader />
+      <AdminSubNav />
       <main className="admin-page listings-page">
-        <div className="admin-page__header">
-          <div>
-            <p className="admin-page__eyebrow">Day 21</p>
-            <h1>Your listings</h1>
-            <p className="admin-page__lead">Create, edit, and remove accommodation listings in Centurion.</p>
-          </div>
-          <Link to="/listings/new" className="admin-page__primary-btn">
-            + Add listing
-          </Link>
-        </div>
+        <header className="listings-page__heading">
+          <h1>My Listings</h1>
+        </header>
 
-        {error && <p className="admin-page__error" role="alert">{error}</p>}
+        {error && (
+          <p className="admin-page__error" role="alert">
+            {error}
+          </p>
+        )}
 
         {loading ? (
-          <p className="admin-page__muted">Loading listings…</p>
+          <p className="admin-page__muted listings-page__status">Loading listings…</p>
         ) : listings.length === 0 ? (
           <div className="listings-page__empty">
             <p>You have no listings yet.</p>
@@ -76,48 +80,68 @@ export default function ListingsPage() {
             </Link>
           </div>
         ) : (
-          <div className="listings-page__table-wrap">
-            <table className="listings-page__table">
-              <thead>
-                <tr>
-                  <th>Photo</th>
-                  <th>Title</th>
-                  <th>Location</th>
-                  <th>Type</th>
-                  <th>Guests</th>
-                  <th>Price / night</th>
-                  <th aria-label="Actions" />
-                </tr>
-              </thead>
-              <tbody>
-                {listings.map((listing, index) => (
-                  <tr key={listing._id}>
-                    <td>
-                      <img
-                        className="listings-page__thumb"
-                        src={imageUrl(listing.images?.[0]) || "/favicon.svg"}
-                        alt=""
-                      />
-                    </td>
-                    <td>{listing.title}</td>
-                    <td>{listing.location}</td>
-                    <td>{listing.type}</td>
-                    <td>{listing.guests}</td>
-                    <td>R {listing.price}</td>
-                    <td className="listings-page__actions">
-                      <Link to={`/listings/${listing._id}/edit`}>Edit</Link>
-                      <button
-                        type="button"
-                        onClick={() => handleDelete(listing)}
-                        disabled={deletingId === listing._id}
-                      >
-                        {deletingId === listing._id ? "Deleting…" : "Delete"}
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+          <div className="listings-page__list">
+            {listings.map((listing) => (
+              <article key={listing._id} className="listings-page__card">
+                <div className="listings-page__media">
+                  <div className="listings-page__image">
+                    <img
+                      src={imageUrl(listing.images?.[0]) || "/favicon.svg"}
+                      alt={listing.title}
+                    />
+                  </div>
+                  <Link
+                    to={`/listings/${listing._id}/edit`}
+                    className="listings-page__update"
+                  >
+                    Update
+                  </Link>
+                  <button
+                    type="button"
+                    className="listings-page__delete"
+                    onClick={() => handleDelete(listing)}
+                    disabled={deletingId === listing._id}
+                  >
+                    {deletingId === listing._id ? "Deleting…" : "Delete"}
+                  </button>
+                </div>
+
+                <div className="listings-page__details">
+                  <p className="listings-page__meta">
+                    {listing.type} - {listing.location}
+                  </p>
+                  <h2 className="listings-page__title">{listing.title}</h2>
+                  <p className="listings-page__specs">
+                    {listing.guests} guests - {listing.type} - {listing.bedrooms} bedroom
+                    {listing.bedrooms === 1 ? "" : "s"} - {listing.bathrooms} bathroom
+                    {listing.bathrooms === 1 ? "" : "s"}
+                  </p>
+                  <p className="listings-page__amenities">
+                    Amenities: {formatAmenities(listing.amenities)}
+                  </p>
+                  <div className="listings-page__footer">
+                    {listing.rating > 0 ? (
+                      <span className="listings-page__rating">
+                        ★ {listing.rating}
+                        {listing.reviews > 0 && (
+                          <span className="listings-page__reviews">
+                            {" "}
+                            ({listing.reviews} reviews)
+                          </span>
+                        )}
+                      </span>
+                    ) : (
+                      <span className="listings-page__rating listings-page__rating--new">
+                        New listing
+                      </span>
+                    )}
+                    <p className="listings-page__price">
+                      <strong>R{listing.price}</strong>/night
+                    </p>
+                  </div>
+                </div>
+              </article>
+            ))}
           </div>
         )}
       </main>

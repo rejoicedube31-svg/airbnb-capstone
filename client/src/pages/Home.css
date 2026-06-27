@@ -1,1 +1,5 @@
-/* Home page layout — section styles live in component CSS files */
+/* Home page — sections use full viewport width; see --home-gutter in index.css */
+.home {
+  width: 100%;
+  overflow-x: hidden;
+}

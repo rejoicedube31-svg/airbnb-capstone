@@ -30,6 +30,14 @@ export default function App() {
             }
           />
           <Route
+            path="/view-listings"
+            element={
+              <ProtectedRoute>
+                <ListingsPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
             path="/listings/new"
             element={
               <ProtectedRoute>
@@ -47,6 +55,14 @@ export default function App() {
           />
           <Route
             path="/reservations"
+            element={
+              <ProtectedRoute>
+                <ReservationsPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/view-reservations"
             element={
               <ProtectedRoute>
                 <ReservationsPage />
