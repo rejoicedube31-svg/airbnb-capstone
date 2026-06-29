@@ -34,7 +34,15 @@ async function startServer() {
   app.use(
     cors(
       allowedOrigins.length > 0
-        ? { origin: allowedOrigins }
+        ? {
+            origin(origin, callback) {
+              if (!origin || allowedOrigins.includes(origin)) {
+                callback(null, true);
+                return;
+              }
+              callback(new Error("Not allowed by CORS"));
+            },
+          }
         : undefined
     )
   );

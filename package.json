@@ -10,7 +10,7 @@
   },
   "scripts": {
     "start": "node backend/server.js",
-    "heroku-postbuild": "npm install --prefix client --include=dev && npm run build --prefix client && npm install --prefix admin --include=dev && npm run build --prefix admin -- --base /admin/ && npm install --prefix backend",
+    "heroku-postbuild": "npm install --prefix client --include=dev && env VITE_API_URL= npm run build --prefix client && npm install --prefix admin --include=dev && env VITE_API_URL= npm run build --prefix admin -- --base /admin/ && npm install --prefix backend",
     "seed": "npm run seed --prefix backend",
     "test:api": "npm run test:api --prefix backend"
   },

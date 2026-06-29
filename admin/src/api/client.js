@@ -2,7 +2,20 @@
  * API helpers + auth token storage for the admin dashboard.
  * Uses separate localStorage keys from the public client.
  */
-export const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+function resolveApiUrl() {
+  const configured = import.meta.env.VITE_API_URL;
+
+  if (import.meta.env.PROD) {
+    if (configured && !/localhost|127\.0\.0\.1/i.test(configured)) {
+      return configured;
+    }
+    return "";
+  }
+
+  return configured || "http://localhost:5000";
+}
+
+export const API_URL = resolveApiUrl();
 
 const TOKEN_KEY = "airbnb_capstone_admin_token";
 const USER_KEY = "airbnb_capstone_admin_user";
@@ -161,7 +174,9 @@ export async function loginHost(email, password) {
 }
 
 export function imageUrl(path) {
-  const clientUrl = import.meta.env.VITE_CLIENT_URL || "http://localhost:5173";
+  const clientUrl =
+    import.meta.env.VITE_CLIENT_URL ||
+    (import.meta.env.PROD ? "" : "http://localhost:5173");
   if (!path) return "";
   if (path.startsWith("http")) return path;
   if (path.startsWith("/uploads/")) return `${API_URL}${path}`;

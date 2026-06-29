@@ -1,7 +1,21 @@
 /**
  * API helpers + auth token storage for the React client.
  */
-export const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+function resolveApiUrl() {
+  const configured = import.meta.env.VITE_API_URL;
+
+  if (import.meta.env.PROD) {
+    // Same-origin Heroku deploy — ignore accidental localhost from build env
+    if (configured && !/localhost|127\.0\.0\.1/i.test(configured)) {
+      return configured;
+    }
+    return "";
+  }
+
+  return configured || "http://localhost:5000";
+}
+
+export const API_URL = resolveApiUrl();
 
 const TOKEN_KEY = "airbnb_capstone_token";
 const USER_KEY = "airbnb_capstone_user";
