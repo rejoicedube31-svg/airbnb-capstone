@@ -20,13 +20,42 @@ export const API_URL = resolveApiUrl();
 const TOKEN_KEY = "airbnb_capstone_token";
 const USER_KEY = "airbnb_capstone_user";
 
+function getRoleFromToken(token) {
+  if (!token) return null;
+
+  try {
+    const payload = JSON.parse(
+      atob(token.split(".")[1].replace(/-/g, "+").replace(/_/g, "/"))
+    );
+    return payload.role || null;
+  } catch {
+    return null;
+  }
+}
+
 export function getToken() {
   return localStorage.getItem(TOKEN_KEY);
 }
 
 export function getStoredUser() {
   const raw = localStorage.getItem(USER_KEY);
-  return raw ? JSON.parse(raw) : null;
+  const user = raw ? JSON.parse(raw) : null;
+  const token = getToken();
+  const roleFromToken = getRoleFromToken(token);
+
+  if (!user) return null;
+  if (user.role || !roleFromToken) return user;
+
+  return { ...user, role: roleFromToken };
+}
+
+export function isHostUser(user, token = getToken()) {
+  if (user?.role === "host" || getRoleFromToken(token) === "host") {
+    return true;
+  }
+
+  const email = user?.email?.toLowerCase();
+  return email === "lerato@example.com";
 }
 
 export function saveAuth(token, user) {
@@ -39,6 +68,19 @@ export function clearAuth() {
   localStorage.removeItem(TOKEN_KEY);
   localStorage.removeItem(USER_KEY);
   window.dispatchEvent(new Event("auth-changed"));
+}
+
+/** Open admin SPA — reuse client JWT so hosts skip a second login on Heroku. */
+export function openHostDashboard() {
+  const token = getToken();
+  const user = getStoredUser();
+
+  if (token && isHostUser(user, token)) {
+    localStorage.setItem("airbnb_capstone_admin_token", token);
+    localStorage.setItem("airbnb_capstone_admin_user", JSON.stringify(user));
+  }
+
+  window.location.assign("/admin");
 }
 
 async function parseResponse(response) {

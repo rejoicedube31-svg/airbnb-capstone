@@ -1,11 +1,12 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { useAuth } from "../context/AuthContext";
+import { openHostDashboard, isHostUser } from "../api/client";
 import "./Header.css";
 
 export default function Header({ locationValue, onLocationSearch, variant = "default" }) {
   const navigate = useNavigate();
-  const { user, isLoggedIn, logout } = useAuth();
+  const { user, token, isLoggedIn, logout } = useAuth();
   const [query, setQuery] = useState(locationValue || "Cape Town");
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef(null);
@@ -45,6 +46,13 @@ export default function Header({ locationValue, onLocationSearch, variant = "def
     setMenuOpen(false);
     navigate("/");
   }
+
+  function handleHostDashboard() {
+    setMenuOpen(false);
+    openHostDashboard();
+  }
+
+  const isHost = isHostUser(user, token);
 
   return (
     <header className={`header${isHome ? " header--home" : ""}`}>
@@ -141,6 +149,16 @@ export default function Header({ locationValue, onLocationSearch, variant = "def
                   >
                     View reservations
                   </Link>
+                  {isHost && (
+                    <button
+                      type="button"
+                      className="header__dropdown-item"
+                      role="menuitem"
+                      onClick={handleHostDashboard}
+                    >
+                      Host dashboard
+                    </button>
+                  )}
                   <button
                     type="button"
                     className="header__dropdown-item header__dropdown-item--btn"

@@ -27,7 +27,7 @@ export function AuthProvider({ children }) {
       localStorage.setItem("airbnb_capstone_user", JSON.stringify(userValue));
     }
     setToken(tokenValue);
-    setUser(userValue);
+    setUser(getStoredUser());
     window.dispatchEvent(new Event("auth-changed"));
   }
 
