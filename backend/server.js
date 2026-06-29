@@ -1,5 +1,6 @@
 require("dotenv").config();
 
+const fs = require("fs");
 const path = require("path");
 const express = require("express");
 const cors = require("cors");
@@ -20,7 +21,16 @@ async function startServer() {
   const app = express();
 
   // CORS — open in dev; restrict to React URLs in production via .env
-  const allowedOrigins = [process.env.CLIENT_URL, process.env.ADMIN_URL].filter(Boolean);
+  const allowedOrigins = [process.env.CLIENT_URL, process.env.ADMIN_URL]
+    .flatMap((value) =>
+      value
+        ? value
+            .split(",")
+            .map((url) => url.trim())
+            .filter(Boolean)
+        : []
+    );
+
   app.use(
     cors(
       allowedOrigins.length > 0
@@ -50,12 +60,34 @@ async function startServer() {
   app.use("/api/accommodations", accommodationRoutes);
   app.use("/api/reservations", reservationRoutes);
 
-  // 404 — no matching route
-  app.use((req, res) => {
-    res.status(404).json({
-      success: false,
-      message: `Not found: ${req.method} ${req.originalUrl}`,
+  const serveStatic =
+    process.env.NODE_ENV === "production" || process.env.SERVE_STATIC === "true";
+  const clientDist = path.join(__dirname, "..", "client", "dist");
+  const adminDist = path.join(__dirname, "..", "admin", "dist");
+
+  if (serveStatic && fs.existsSync(adminDist)) {
+    app.use("/admin", express.static(adminDist, { index: false }));
+    app.get(/^\/admin(\/.*)?$/, (req, res) => {
+      res.sendFile(path.join(adminDist, "index.html"));
     });
+  }
+
+  if (serveStatic && fs.existsSync(clientDist)) {
+    app.use(express.static(clientDist, { index: false }));
+    app.get(/^(?!\/api|\/uploads|\/admin).*/, (req, res) => {
+      res.sendFile(path.join(clientDist, "index.html"));
+    });
+  }
+
+  // 404 — API routes only (static apps handle their own SPA fallbacks)
+  app.use((req, res, next) => {
+    if (req.path.startsWith("/api")) {
+      return res.status(404).json({
+        success: false,
+        message: `Not found: ${req.method} ${req.originalUrl}`,
+      });
+    }
+    return next();
   });
 
   // Errors passed with next(err) from routes/controllers land here

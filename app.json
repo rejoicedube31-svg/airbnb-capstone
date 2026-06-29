@@ -1,0 +1,31 @@
+{
+  "name": "Airbnb Capstone",
+  "description": "Full-stack Airbnb clone — Express API, React client, React admin",
+  "repository": "https://github.com/rejoicedube31-svg/airbnb-capstone",
+  "keywords": ["node", "express", "react", "mongodb"],
+  "env": {
+    "MONGODB_URI": {
+      "description": "MongoDB Atlas connection string (mongodb://...)",
+      "required": true
+    },
+    "JWT_SECRET": {
+      "description": "Long random string for JWT signing",
+      "required": true,
+      "generator": "secret"
+    },
+    "NODE_ENV": {
+      "value": "production"
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "eco"
+    }
+  },
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ]
+}
